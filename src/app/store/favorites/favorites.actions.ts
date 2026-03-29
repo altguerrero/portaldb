@@ -9,3 +9,8 @@ export const addFavorite = createAction(
 export const removeFavorite = createAction('[Favorites] Remove Favorite', props<{ id: string }>());
 
 export const loadFavoritesFromStorage = createAction('[Favorites] Load Favorites From Storage');
+
+export const loadFavoritesFromStorageSuccess = createAction(
+  '[Favorites] Load Favorites From Storage Success',
+  props<{ characters: Character[] }>(),
+);
