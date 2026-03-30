@@ -30,6 +30,9 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: APP_ROUTES.characters.slice(1),
+    loadComponent: () =>
+      import('./features/not-found/pages/not-found-page/not-found-page').then(
+        (m) => m.NotFoundPage,
+      ),
   },
 ];

@@ -1,0 +1,101 @@
+:host {
+  display: block;
+}
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+}
+
+.pagination__pages {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.pagination__control,
+.pagination__page {
+  min-width: 3.8rem;
+  height: 3rem;
+  padding: 0 1rem;
+  border: var(--border-accent-soft);
+  background: rgb(var(--color-surface-card-rgb) / 0.72);
+  color: var(--color-accent);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  transition:
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    background-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.pagination__control:hover,
+.pagination__page:hover {
+  border: var(--border-accent-solid);
+  background: var(--surface-accent-hover);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+.pagination__control:disabled,
+.pagination__page:disabled {
+  transform: none;
+  cursor: default;
+}
+
+.pagination__page {
+  min-width: 3rem;
+  padding: 0 0.8rem;
+}
+
+.pagination__page--active {
+  border: var(--border-accent-solid);
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+  box-shadow: var(--shadow-pill-accent);
+}
+
+.pagination__page--active:hover,
+.pagination__page--active:disabled {
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+  box-shadow: var(--shadow-pill-accent);
+}
+
+.pagination__control:disabled {
+  border: var(--border-neutral);
+  background: rgb(var(--color-surface-card-rgb) / 0.45);
+  color: var(--text-secondary-quiet);
+  box-shadow: none;
+}
+
+.pagination__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  color: var(--text-secondary-muted);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+@media (min-width: 1280px) {
+  .pagination__control,
+  .pagination__page {
+    height: 3.15rem;
+  }
+}

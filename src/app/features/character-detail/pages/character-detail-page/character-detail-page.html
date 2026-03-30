@@ -1,26 +1,18 @@
-<section class="space-y-5">
-  <p class="text-sm uppercase tracking-[0.3em] text-[rgba(185,203,188,0.72)]">Subject Profile</p>
+<section class="detail-page">
+  <p class="detail-page__eyebrow">Subject Profile</p>
 
-  <h1 class="font-display text-4xl font-bold uppercase tracking-[0.08em] text-white md:text-6xl">
-    Character Detail
-  </h1>
+  <h1 class="detail-page__title">Character Detail</h1>
 
-  <p class="max-w-2xl text-base text-[rgba(185,203,188,0.8)] md:text-lg">
+  <p class="detail-page__description">
     This route will host the detail view for a single character and the favorite toggle.
   </p>
 
-  <div class="flex flex-wrap gap-4 pt-3">
-    <a
-      [routerLink]="routes.characters"
-      class="inline-flex items-center justify-center border border-[rgba(0,255,156,0.35)] px-5 py-3 font-display text-sm font-semibold uppercase tracking-[0.22em] text-[#00ff9c] transition hover:border-[#00ff9c] hover:bg-[rgba(0,255,156,0.08)]"
-    >
+  <div class="detail-page__actions">
+    <a [routerLink]="routes.characters" class="detail-page__button detail-page__button--primary">
       Back To Characters
     </a>
 
-    <a
-      [routerLink]="routes.favorites"
-      class="inline-flex items-center justify-center border border-[rgba(185,203,188,0.25)] px-5 py-3 font-display text-sm font-semibold uppercase tracking-[0.22em] text-[rgba(185,203,188,0.82)] transition hover:border-[rgba(0,255,156,0.4)] hover:text-[#00ff9c]"
-    >
+    <a [routerLink]="routes.favorites" class="detail-page__button detail-page__button--secondary">
       Go To Favorites
     </a>
   </div>

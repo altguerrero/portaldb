@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { ApplicationConfig, isDevMode, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -19,6 +19,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     provideStore({ favorites: favoritesReducer }),
     provideEffects([FavoritesEffects]),
-    provideStoreDevtools({ maxAge: 25, logOnly: false }),
+    ...(isDevMode() ? [provideStoreDevtools({ maxAge: 25, logOnly: false })] : []),
   ],
 };

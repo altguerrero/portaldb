@@ -8,21 +8,56 @@ import express from 'express';
 import { join } from 'node:path';
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
+const upstreamApiUrl = process.env['RICK_API_URL'] || 'https://rickandmortyapi.com/api';
 
 const app = express();
 const angularApp = new AngularNodeAppEngine();
 
 /**
- * Example Express Rest API endpoints can be defined here.
- * Uncomment and define endpoints as necessary.
- *
- * Example:
- * ```ts
- * app.get('/api/{*splat}', (req, res) => {
- *   // Handle API request
- * });
- * ```
+ * Proxy the Rick and Morty API through the SSR server to avoid browser CORS
+ * issues and keep the same base URL for client-side and server-side requests.
  */
+app.get('/api/{*splat}', async (req, res, next) => {
+  try {
+    const splat = req.params['splat'];
+    const apiPath = Array.isArray(splat) ? splat.join('/') : String(splat ?? '');
+
+    if (!apiPath.length) {
+      res.status(400).json({ error: 'Missing API path.' });
+      return;
+    }
+
+    const targetUrl = new URL(`${upstreamApiUrl}/${apiPath}`);
+
+    for (const [key, value] of Object.entries(req.query)) {
+      if (Array.isArray(value)) {
+        value.forEach((item) => targetUrl.searchParams.append(key, String(item)));
+        continue;
+      }
+
+      if (value != null) {
+        targetUrl.searchParams.set(key, String(value));
+      }
+    }
+
+    const upstreamResponse = await fetch(targetUrl, {
+      headers: {
+        accept: 'application/json',
+      },
+    });
+
+    const responseBody = await upstreamResponse.text();
+
+    res.status(upstreamResponse.status);
+    res.setHeader(
+      'content-type',
+      upstreamResponse.headers.get('content-type') ?? 'application/json; charset=utf-8',
+    );
+    res.send(responseBody);
+  } catch (error) {
+    next(error);
+  }
+});
 
 /**
  * Serve static files from /browser

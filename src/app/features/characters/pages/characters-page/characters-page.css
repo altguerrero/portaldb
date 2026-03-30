@@ -1,0 +1,122 @@
+.characters-page {
+  display: grid;
+  gap: 5rem;
+  width: min(100%, var(--layout-page-max));
+  margin: 0 auto;
+  padding-top: 2rem;
+}
+
+.characters-page__hero {
+  display: grid;
+  gap: 2rem;
+  padding-bottom: .25rem;
+}
+
+.characters-page__heading {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.characters-page__title {
+  max-width: 75rem;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.characters-page__title-accent {
+  color: var(--color-accent);
+  text-shadow: var(--shadow-title-accent);
+}
+
+.characters-page__rule {
+  width: min(100%, 12rem);
+  height: 1px;
+  background: linear-gradient(90deg, rgb(var(--color-accent-rgb) / 0.85), transparent);
+  box-shadow: var(--shadow-line-accent);
+}
+
+.characters-page__intro {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  max-width: 47.5rem;
+}
+
+.characters-page__intro-bar {
+  display: block;
+  width: 2px;
+  height: 1.5rem;
+  margin-top: .25rem;
+  background: var(--color-accent);
+  box-shadow: var(--shadow-line-accent-soft);
+}
+
+.characters-page__intro-text {
+  color: var(--text-secondary-faint);
+  font-size: clamp(.875rem, 1vw, .9375rem);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.characters-page__grid {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  gap: 3.5rem 2rem;
+  padding: 1rem;
+  border-radius: var(--radius-xl);
+  background: var(--surface-grid-panel);
+}
+
+.characters-page__grid::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--surface-grid-veil);
+  pointer-events: none;
+}
+
+@media (min-width: 640px) {
+  .characters-page__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .characters-page {
+    gap: 6rem;
+    padding-top: 3rem;
+  }
+
+  .characters-page__hero {
+    gap: 2.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .characters-page__heading {
+    gap: 1.5rem;
+  }
+
+  .characters-page__grid {
+    gap: 4rem 2.25rem;
+    padding: 1.25rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .characters-page {
+    gap: 7rem;
+    padding-top: 4rem;
+  }
+
+  .characters-page__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 4.5rem 2.5rem;
+    padding: 1.5rem;
+  }
+}

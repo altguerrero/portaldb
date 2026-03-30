@@ -6,47 +6,45 @@
 .app-shell {
   position: relative;
   min-height: 100vh;
-  background:
-    radial-gradient(circle at top center, rgba(0, 255, 156, 0.12), transparent 38%),
-    linear-gradient(180deg, #0a0e13 0%, #080b0f 28%, #080b0f 100%);
   overflow: hidden;
+  background: var(--surface-app);
 }
 
 .app-shell__glow {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(180deg, rgba(0, 255, 156, 0.08), transparent 120px);
+  background: var(--surface-app-glow);
   opacity: 0.9;
 }
 
 .app-content {
   position: relative;
   z-index: 1;
-  width: min(1280px, calc(100% - 32px));
+  width: min(var(--layout-content-max), calc(100% - 3rem));
   margin: 0 auto;
-  padding: 48px 0 96px;
+  padding: 4rem 0 7rem;
 }
 
 .app-footer {
   position: relative;
   z-index: 1;
-  padding: 24px 16px 32px;
-  text-align: center;
-  color: rgba(185, 203, 188, 0.18);
-  font-size: 12px;
+  padding: 1.5rem 1rem 2rem;
+  color: var(--text-secondary-ghost);
+  font-size: 0.75rem;
   letter-spacing: 0.24em;
+  text-align: center;
   text-transform: uppercase;
 }
 
 @media (max-width: 768px) {
   .app-content {
-    width: min(100% - 24px, 1280px);
-    padding: 32px 0 72px;
+    width: min(var(--layout-content-max), calc(100% - 1.5rem));
+    padding: 2.25rem 0 5rem;
   }
 
   .app-footer {
-    font-size: 10px;
+    font-size: 0.625rem;
     letter-spacing: 0.18em;
   }
 }

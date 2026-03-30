@@ -1,27 +1,35 @@
-<section class="space-y-5">
-  <p class="text-sm uppercase tracking-[0.3em] text-[rgba(185,203,188,0.72)]">Portal Registry</p>
+@if (vm$ | async; as vm) {
+  <section #pageTop class="characters-page">
+    <div class="characters-page__hero">
+      <div class="characters-page__heading">
+        <h1 class="characters-page__title">
+          Character
+          <span class="characters-page__title-accent"> Registry </span>
+        </h1>
 
-  <h1 class="font-display text-4xl font-bold uppercase tracking-[0.08em] text-white md:text-6xl">
-    Characters
-  </h1>
+        <div class="characters-page__rule"></div>
+      </div>
 
-  <p class="max-w-2xl text-base text-[rgba(185,203,188,0.8)] md:text-lg">
-    This route will host the SSR character grid, filters and pagination flow.
-  </p>
+      <div class="characters-page__intro">
+        <span class="characters-page__intro-bar"></span>
 
-  <div class="flex flex-wrap gap-4 pt-3">
-    <a
-      [routerLink]="routes.characterDetail(1)"
-      class="inline-flex items-center justify-center border border-[rgba(0,255,156,0.35)] px-5 py-3 font-display text-sm font-semibold uppercase tracking-[0.22em] text-[#00ff9c] transition hover:border-[#00ff9c] hover:bg-[rgba(0,255,156,0.08)]"
-    >
-      Open Sample Detail
-    </a>
+        <p class="characters-page__intro-text">
+          Accessing biological data from {{ vm.response.info.count }} confirmed multiversal entities.
+        </p>
+      </div>
+    </div>
 
-    <a
-      [routerLink]="routes.favorites"
-      class="inline-flex items-center justify-center border border-[rgba(185,203,188,0.25)] px-5 py-3 font-display text-sm font-semibold uppercase tracking-[0.22em] text-[rgba(185,203,188,0.82)] transition hover:border-[rgba(0,255,156,0.4)] hover:text-[#00ff9c]"
-    >
-      Go To Favorites
-    </a>
-  </div>
-</section>
+    <div class="characters-page__grid">
+      @for (character of vm.response.results; track character.id) {
+        <app-character-card [character]="character" />
+      }
+    </div>
+
+    <app-pagination
+      ariaLabel="Characters pagination"
+      [currentPage]="vm.page"
+      [totalPages]="vm.response.info.pages"
+      (pageChange)="goToPage($event, vm.response.info.pages)"
+    />
+  </section>
+}

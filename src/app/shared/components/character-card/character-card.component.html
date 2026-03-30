@@ -1,0 +1,49 @@
+<a
+  [routerLink]="routes.characterDetail(character().id)"
+  class="character-card"
+>
+  <div class="character-card__media">
+    <img
+      [src]="character().image"
+      [alt]="character().name"
+      class="character-card__image"
+    />
+
+    <span
+      class="character-card__status"
+      [class.character-card__status--alive]="character().status === 'Alive'"
+      [class.character-card__status--dead]="character().status === 'Dead'"
+      [class.character-card__status--unknown]="character().status === 'unknown'"
+    >
+      <span class="character-card__status-dot"></span>
+      {{ statusLabel() }}
+    </span>
+
+    <div class="character-card__registry">
+      <span class="character-card__registry-id">{{ registryId() }}</span>
+      <span class="character-card__registry-tag">{{ profileTag() }}</span>
+    </div>
+  </div>
+
+  <div class="character-card__body">
+    <div class="character-card__header">
+      <p class="character-card__eyebrow">Species: {{ character().species }}</p>
+
+      <h2 class="character-card__name">{{ character().name }}</h2>
+    </div>
+
+    <div class="character-card__divider"></div>
+
+    <div class="character-card__details">
+      <div class="character-card__detail">
+        <p class="character-card__detail-label">Origin World</p>
+        <p class="character-card__detail-value">{{ character().origin.name }}</p>
+      </div>
+
+      <div class="character-card__detail">
+        <p class="character-card__detail-label">Current Location</p>
+        <p class="character-card__detail-value">{{ character().location.name }}</p>
+      </div>
+    </div>
+  </div>
+</a>
