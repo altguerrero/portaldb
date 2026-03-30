@@ -11,15 +11,12 @@
           <div class="detail-page__media-header">
             <span class="detail-page__registry">{{ vm.registryId }}</span>
 
-            <span
-              class="detail-page__status-badge"
-              [class.detail-page__status-badge--alive]="character.status === 'Alive'"
-              [class.detail-page__status-badge--dead]="character.status === 'Dead'"
-              [class.detail-page__status-badge--unknown]="character.status === 'unknown'"
-            >
-              <span class="detail-page__status-dot"></span>
-              {{ vm.statusLabel }}
-            </span>
+            <div class="detail-page__status-badge">
+              <app-status-badge
+                [status]="character.status"
+                size="md"
+              />
+            </div>
           </div>
 
           <div class="detail-page__portrait-shell">
@@ -123,18 +120,18 @@
           </div>
 
           <div class="detail-page__actions">
-            <button
-              type="button"
-              class="detail-page__button detail-page__button--primary"
-              [class.detail-page__button--active]="vm.isFavorite"
-              (click)="toggleFavorite(character, vm.isFavorite)"
-            >
-              {{ vm.isFavorite ? 'Remove From Favorites' : 'Add To Favorites' }}
-            </button>
+            <app-button
+              [label]="vm.isFavorite ? 'Remove From Favorites' : 'Add To Favorites'"
+              variant="primary"
+              [active]="vm.isFavorite"
+              (pressed)="toggleFavorite(character, vm.isFavorite)"
+            />
 
-            <a [routerLink]="routes.favorites" class="detail-page__button detail-page__button--secondary">
-              Open Favorites
-            </a>
+            <app-button
+              label="Open Favorites"
+              [routerLink]="routes.favorites"
+              variant="secondary"
+            />
           </div>
         </article>
       </div>
@@ -151,13 +148,17 @@
       </p>
 
       <div class="detail-page__actions">
-        <a [routerLink]="routes.characters" class="detail-page__button detail-page__button--primary">
-          Browse Characters
-        </a>
+        <app-button
+          label="Browse Characters"
+          [routerLink]="routes.characters"
+          variant="primary"
+        />
 
-        <a [routerLink]="routes.favorites" class="detail-page__button detail-page__button--secondary">
-          Open Favorites
-        </a>
+        <app-button
+          label="Open Favorites"
+          [routerLink]="routes.favorites"
+          variant="secondary"
+        />
       </div>
     </section>
   }

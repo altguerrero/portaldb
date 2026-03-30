@@ -1,0 +1,11 @@
+<span
+  class="status-badge"
+  [class.status-badge--sm]="size() === 'sm'"
+  [class.status-badge--md]="size() === 'md'"
+  [class.status-badge--alive]="status() === 'Alive'"
+  [class.status-badge--dead]="status() === 'Dead'"
+  [class.status-badge--unknown]="status() === 'unknown'"
+>
+  <span class="status-badge__dot"></span>
+  {{ label() }}
+</span>

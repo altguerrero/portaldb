@@ -27,19 +27,6 @@
   pointer-events: none;
 }
 
-.character-card::after {
-  content: '';
-  position: absolute;
-  top: 18px;
-  left: 18px;
-  width: 72px;
-  height: 2px;
-  border-radius: var(--radius-full);
-  background: var(--surface-accent-line);
-  box-shadow: var(--shadow-line-accent-soft);
-  pointer-events: none;
-}
-
 .character-card:hover {
   transform: translateY(-6px);
   border-color: var(--color-accent);
@@ -73,53 +60,17 @@
   transition: transform var(--transition-slow);
 }
 
-.character-card__status,
 .character-card__registry {
   position: absolute;
   z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  border: var(--border-glass);
-  background: var(--surface-glass);
-  backdrop-filter: blur(10px);
 }
 
 .character-card__status {
+  position: absolute;
   top: 16px;
   right: 16px;
-  padding: 0.5rem 0.9rem;
-  border-radius: var(--radius-full);
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.character-card__status-dot {
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: var(--radius-full);
-  background: currentColor;
-  box-shadow: var(--shadow-status-dot);
-}
-
-.character-card__status--alive {
-  color: var(--color-accent-ink);
-  background: var(--surface-status-alive);
-  box-shadow: var(--shadow-pill-accent);
-}
-
-.character-card__status--dead {
-  color: var(--color-danger-ink);
-  background: var(--surface-status-dead);
-  box-shadow: var(--shadow-pill-danger);
-}
-
-.character-card__status--unknown {
-  color: var(--color-status-unknown-text);
-  background: var(--surface-status-unknown);
-  box-shadow: var(--shadow-pill-neutral);
+  display: inline-flex;
+  z-index: 2;
 }
 
 .character-card__registry {
@@ -131,7 +82,10 @@
   gap: 0.75rem;
   max-width: calc(100% - 32px);
   padding: 0.52rem 0.78rem;
+  border: var(--border-glass);
   border-radius: var(--radius-md);
+  background: var(--surface-glass);
+  backdrop-filter: blur(10px);
   color: var(--text-primary-soft);
   font-size: 0.68rem;
   font-weight: 700;
