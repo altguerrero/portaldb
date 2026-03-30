@@ -1,19 +1,9 @@
-<a
-  [routerLink]="routes.characterDetail(character().id)"
-  class="character-card"
->
+<a [routerLink]="routes.characterDetail(character().id)" class="character-card">
   <div class="character-card__media">
-    <img
-      [src]="character().image"
-      [alt]="character().name"
-      class="character-card__image"
-    />
+    <img [src]="character().image" [alt]="character().name" class="character-card__image" />
 
     <div class="character-card__status">
-      <app-status-badge
-        [status]="character().status"
-        size="sm"
-      />
+      <app-status-badge [status]="character().status" size="sm" />
     </div>
 
     <div class="character-card__registry">

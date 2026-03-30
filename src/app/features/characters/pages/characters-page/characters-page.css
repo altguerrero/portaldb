@@ -49,14 +49,14 @@
   display: block;
   width: 2px;
   height: 1.5rem;
-  margin-top: .25rem;
+  margin-top: 0.25rem;
   background: var(--color-accent);
   box-shadow: var(--shadow-line-accent-soft);
 }
 
 .characters-page__intro-text {
   color: var(--text-secondary-faint);
-  font-size: clamp(.875rem, 1vw, .9375rem);
+  font-size: clamp(0.875rem, 1vw, 0.9375rem);
   letter-spacing: 0.18em;
   text-transform: uppercase;
 }
@@ -116,7 +116,11 @@
   min-height: 18rem;
   background:
     radial-gradient(circle at top center, rgb(var(--color-accent-rgb) / 0.16), transparent 38%),
-    linear-gradient(180deg, rgb(var(--color-surface-card-top-rgb) / 0.95), rgb(var(--color-surface-overlay-rgb) / 0.98));
+    linear-gradient(
+      180deg,
+      rgb(var(--color-surface-card-top-rgb) / 0.95),
+      rgb(var(--color-surface-overlay-rgb) / 0.98)
+    );
 }
 
 .characters-page__skeleton-body {

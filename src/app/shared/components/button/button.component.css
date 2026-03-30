@@ -27,7 +27,7 @@
     color var(--transition-fast),
     background-color var(--transition-fast),
     transform var(--transition-fast),
-  box-shadow var(--transition-fast);
+    box-shadow var(--transition-fast);
 }
 
 .ui-button__label {

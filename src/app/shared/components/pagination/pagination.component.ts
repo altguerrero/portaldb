@@ -66,9 +66,7 @@ export class PaginationComponent {
   readonly pageChange = output<number>();
 
   readonly shouldRender = computed(() => this.totalPages() > 1);
-  readonly paginationItems = computed(() =>
-    buildPagination(this.currentPage(), this.totalPages()),
-  );
+  readonly paginationItems = computed(() => buildPagination(this.currentPage(), this.totalPages()));
   readonly hasPreviousPage = computed(() => this.currentPage() > 1);
   readonly hasNextPage = computed(() => this.currentPage() < this.totalPages());
 

@@ -14,10 +14,7 @@
                 <span class="detail-page__registry">{{ vm.registryId }}</span>
 
                 <div class="detail-page__status-badge">
-                  <app-status-badge
-                    [status]="character.status"
-                    size="md"
-                  />
+                  <app-status-badge [status]="character.status" size="md" />
                 </div>
               </div>
 
@@ -121,9 +118,7 @@
                   <p class="detail-page__stat-value detail-page__stat-value--compact">
                     {{ character.origin.name }}
                   </p>
-                  <p class="detail-page__stat-copy">
-                    Source world of record for this subject.
-                  </p>
+                  <p class="detail-page__stat-copy">Source world of record for this subject.</p>
                 </article>
               </div>
 
@@ -171,11 +166,7 @@
         </p>
 
         <div class="detail-page__actions">
-          <app-button
-            label="Retry Scan"
-            variant="primary"
-            (pressed)="retry()"
-          />
+          <app-button label="Retry Scan" variant="primary" (pressed)="retry()" />
 
           <app-button
             label="Browse Characters"
@@ -183,11 +174,7 @@
             variant="secondary"
           />
 
-          <app-button
-            label="Open Favorites"
-            [routerLink]="routes.favorites"
-            variant="ghost"
-          />
+          <app-button label="Open Favorites" [routerLink]="routes.favorites" variant="ghost" />
         </div>
       </section>
     }

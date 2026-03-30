@@ -30,10 +30,16 @@
             <article class="characters-page__skeleton-card">
               <div class="characters-page__skeleton-media"></div>
               <div class="characters-page__skeleton-body">
-                <span class="characters-page__skeleton-line characters-page__skeleton-line--eyebrow"></span>
-                <span class="characters-page__skeleton-line characters-page__skeleton-line--title"></span>
+                <span
+                  class="characters-page__skeleton-line characters-page__skeleton-line--eyebrow"
+                ></span>
+                <span
+                  class="characters-page__skeleton-line characters-page__skeleton-line--title"
+                ></span>
                 <span class="characters-page__skeleton-line"></span>
-                <span class="characters-page__skeleton-line characters-page__skeleton-line--short"></span>
+                <span
+                  class="characters-page__skeleton-line characters-page__skeleton-line--short"
+                ></span>
               </div>
             </article>
           }
@@ -63,11 +69,7 @@
             Try again in a moment or go back to the first page to restart the registry feed.
           </p>
           <div class="characters-page__state-actions">
-            <app-button
-              label="Retry Scan"
-              variant="primary"
-              (pressed)="retryPage()"
-            />
+            <app-button label="Retry Scan" variant="primary" (pressed)="retryPage()" />
             <app-button
               label="Go To First Page"
               [routerLink]="['/characters']"
@@ -86,11 +88,7 @@
             character list.
           </p>
           <div class="characters-page__state-actions">
-            <app-button
-              label="Retry Scan"
-              variant="primary"
-              (pressed)="retryPage()"
-            />
+            <app-button label="Retry Scan" variant="primary" (pressed)="retryPage()" />
             <app-button
               label="Go To First Page"
               [routerLink]="['/characters']"

@@ -67,24 +67,70 @@
   --layout-content-max: 85rem;
   --layout-page-max: 93.75rem;
 
-  --surface-app: radial-gradient(circle at top center, rgb(var(--color-accent-rgb) / 0.12), transparent 38%),
-    linear-gradient(180deg, var(--color-surface-shell-top) 0%, var(--color-surface-bg) 28%, var(--color-surface-bg) 100%);
-  --surface-app-glow: linear-gradient(180deg, rgb(var(--color-accent-rgb) / 0.08), transparent 7.5rem);
+  --surface-app:
+    radial-gradient(circle at top center, rgb(var(--color-accent-rgb) / 0.12), transparent 38%),
+    linear-gradient(
+      180deg,
+      var(--color-surface-shell-top) 0%,
+      var(--color-surface-bg) 28%,
+      var(--color-surface-bg) 100%
+    );
+  --surface-app-glow: linear-gradient(
+    180deg,
+    rgb(var(--color-accent-rgb) / 0.08),
+    transparent 7.5rem
+  );
   --surface-navbar: rgb(var(--color-surface-bg-rgb) / 0.88);
-  --surface-card: linear-gradient(180deg, rgb(var(--color-surface-card-top-rgb) / 0.96) 0%, rgb(var(--color-surface-card-bottom-rgb) / 1) 100%),
+  --surface-card:
+    linear-gradient(
+      180deg,
+      rgb(var(--color-surface-card-top-rgb) / 0.96) 0%,
+      rgb(var(--color-surface-card-bottom-rgb) / 1) 100%
+    ),
     var(--color-surface-card);
-  --surface-card-body: linear-gradient(180deg, rgb(var(--color-surface-card-body-top-rgb) / 0.98) 0%, rgb(var(--color-surface-card-body-bottom-rgb) / 1) 100%);
-  --surface-card-overlay: linear-gradient(180deg, rgb(var(--color-surface-shell-top-rgb) / 0.05) 0%, rgb(var(--color-surface-shell-top-rgb) / 0.1) 45%, rgb(var(--color-surface-shell-top-rgb) / 0.75) 100%),
+  --surface-card-body: linear-gradient(
+    180deg,
+    rgb(var(--color-surface-card-body-top-rgb) / 0.98) 0%,
+    rgb(var(--color-surface-card-body-bottom-rgb) / 1) 100%
+  );
+  --surface-card-overlay:
+    linear-gradient(
+      180deg,
+      rgb(var(--color-surface-shell-top-rgb) / 0.05) 0%,
+      rgb(var(--color-surface-shell-top-rgb) / 0.1) 45%,
+      rgb(var(--color-surface-shell-top-rgb) / 0.75) 100%
+    ),
     radial-gradient(circle at 72% 18%, rgb(var(--color-accent-rgb) / 0.18), transparent 24%);
-  --surface-card-highlight: linear-gradient(140deg, rgb(var(--color-accent-rgb) / 0.14) 0%, transparent 28%);
+  --surface-card-highlight: linear-gradient(
+    140deg,
+    rgb(var(--color-accent-rgb) / 0.14) 0%,
+    transparent 28%
+  );
   --surface-glass: rgb(var(--color-surface-overlay-rgb) / 0.72);
   --surface-accent-soft: rgb(var(--color-accent-rgb) / 0.12);
   --surface-accent-hover: rgb(var(--color-accent-rgb) / 0.08);
-  --surface-grid-panel: linear-gradient(180deg, rgb(var(--color-surface-bg-rgb) / 0.26) 0%, rgb(var(--color-surface-bg-rgb) / 0.1) 100%);
-  --surface-grid-veil: radial-gradient(circle at top center, rgb(var(--color-surface-bg-rgb) / 0.06), transparent 58%);
+  --surface-grid-panel: linear-gradient(
+    180deg,
+    rgb(var(--color-surface-bg-rgb) / 0.26) 0%,
+    rgb(var(--color-surface-bg-rgb) / 0.1) 100%
+  );
+  --surface-grid-veil: radial-gradient(
+    circle at top center,
+    rgb(var(--color-surface-bg-rgb) / 0.06),
+    transparent 58%
+  );
   --surface-accent-line: linear-gradient(90deg, rgb(var(--color-accent-rgb) / 0.85), transparent);
-  --surface-card-body-line: linear-gradient(90deg, rgb(var(--color-accent-rgb) / 0.24), rgb(var(--color-text-primary-rgb) / 0.04), rgb(var(--color-accent-rgb) / 0.1));
-  --surface-card-divider: linear-gradient(90deg, rgb(var(--color-text-secondary-rgb) / 0.16), rgb(var(--color-text-secondary-rgb) / 0.03));
+  --surface-card-body-line: linear-gradient(
+    90deg,
+    rgb(var(--color-accent-rgb) / 0.24),
+    rgb(var(--color-text-primary-rgb) / 0.04),
+    rgb(var(--color-accent-rgb) / 0.1)
+  );
+  --surface-card-divider: linear-gradient(
+    90deg,
+    rgb(var(--color-text-secondary-rgb) / 0.16),
+    rgb(var(--color-text-secondary-rgb) / 0.03)
+  );
   --surface-status-alive: rgb(var(--color-accent-rgb) / 0.96);
   --surface-status-dead: rgb(var(--color-danger-soft-rgb) / 0.96);
   --surface-status-unknown: rgb(var(--color-status-unknown-rgb) / 0.92);
@@ -119,7 +165,8 @@
   --text-secondary-quiet: rgb(var(--color-text-secondary-rgb) / 0.42);
   --text-secondary-ghost: rgb(var(--color-text-secondary-rgb) / 0.18);
 
-  --shadow-navbar: 0 1px 0 rgb(var(--color-accent-rgb) / 0.18), 0 8px 28px rgb(var(--color-accent-rgb) / 0.12);
+  --shadow-navbar:
+    0 1px 0 rgb(var(--color-accent-rgb) / 0.18), 0 8px 28px rgb(var(--color-accent-rgb) / 0.12);
   --shadow-brand: 0 0 16px rgb(var(--color-accent-rgb) / 0.45);
   --shadow-brand-hover: 0 0 22px rgb(var(--color-accent-rgb) / 0.75);
   --shadow-title-accent: 0 0 22px rgb(var(--color-accent-rgb) / 0.42);
@@ -127,9 +174,13 @@
   --shadow-line-accent-soft: 0 0 10px rgb(var(--color-accent-rgb) / 0.55);
   --shadow-link-active: 0 0 12px rgb(var(--color-accent-rgb) / 0.35);
   --shadow-live-dot: 0 0 8px rgb(var(--color-accent-rgb) / 0.65);
-  --shadow-card: inset 0 0 0 1px rgb(var(--color-text-secondary-rgb) / 0.06), 0 22px 38px rgb(var(--color-surface-bg-rgb) / 0.42),
+  --shadow-card:
+    inset 0 0 0 1px rgb(var(--color-text-secondary-rgb) / 0.06),
+    0 22px 38px rgb(var(--color-surface-bg-rgb) / 0.42),
     0 0 18px rgb(var(--color-accent-rgb) / 0.22), 0 0 44px rgb(var(--color-accent-rgb) / 0.1);
-  --shadow-card-hover: inset 0 0 0 1px rgb(var(--color-text-secondary-rgb) / 0.1), 0 26px 48px rgb(var(--color-surface-bg-rgb) / 0.48),
+  --shadow-card-hover:
+    inset 0 0 0 1px rgb(var(--color-text-secondary-rgb) / 0.1),
+    0 26px 48px rgb(var(--color-surface-bg-rgb) / 0.48),
     0 0 24px rgb(var(--color-accent-rgb) / 0.28), 0 0 60px rgb(var(--color-accent-rgb) / 0.14);
   --shadow-pill-accent: 0 0 24px rgb(var(--color-accent-rgb) / 0.24);
   --shadow-pill-danger: 0 0 24px rgb(var(--color-danger-soft-rgb) / 0.24);

@@ -19,7 +19,7 @@ describe('FavoritesEffects', () => {
     vi.restoreAllMocks();
   });
 
-  function setup(platformId: string = 'browser', favorites = [createCharacter()]) {
+  function setup(platformId = 'browser', favorites = [createCharacter()]) {
     const actions$ = new ReplaySubject<Action>(1);
     const favorites$ = new BehaviorSubject(favorites);
     const store = {

@@ -69,10 +69,7 @@
 
             <div class="favorites-page__item-side">
               <div class="favorites-page__status">
-                <app-status-badge
-                  [status]="item.character.status"
-                  size="sm"
-                />
+                <app-status-badge [status]="item.character.status" size="sm" />
               </div>
 
               <div class="favorites-page__item-actions">
@@ -105,11 +102,7 @@
           </p>
         </div>
 
-        <app-button
-          label="Explore Characters"
-          [routerLink]="routes.characters"
-          variant="primary"
-        />
+        <app-button label="Explore Characters" [routerLink]="routes.characters" variant="primary" />
       </section>
     }
   </section>

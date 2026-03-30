@@ -48,7 +48,14 @@ export class CharactersPage {
         startWith(void 0),
         switchMap(() =>
           this.charactersService.getCharacters(page).pipe(
-            map((response) => this.createViewModel(page, response.results, response.info.pages, response.info.count)),
+            map((response) =>
+              this.createViewModel(
+                page,
+                response.results,
+                response.info.pages,
+                response.info.count,
+              ),
+            ),
             catchError(() => [this.createErrorViewModel(page)]),
             startWith(this.createLoadingViewModel(page)),
           ),
@@ -60,15 +67,17 @@ export class CharactersPage {
   goToPage(targetPage: number, totalPages: number): void {
     const safeTargetPage = Math.min(Math.max(targetPage, 1), totalPages);
 
-    void this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: { page: safeTargetPage === 1 ? null : safeTargetPage },
-      queryParamsHandling: 'merge',
-    }).then((didNavigate) => {
-      if (didNavigate) {
-        this.scrollToResultsTop();
-      }
-    });
+    void this.router
+      .navigate([], {
+        relativeTo: this.route,
+        queryParams: { page: safeTargetPage === 1 ? null : safeTargetPage },
+        queryParamsHandling: 'merge',
+      })
+      .then((didNavigate) => {
+        if (didNavigate) {
+          this.scrollToResultsTop();
+        }
+      });
   }
 
   retryPage(): void {
@@ -122,7 +131,8 @@ export class CharactersPage {
       totalPages: 1,
       totalCount: 0,
       characters: [],
-      introText: 'The uplink to the multiversal registry is unstable. Retry the scan to recover the feed.',
+      introText:
+        'The uplink to the multiversal registry is unstable. Retry the scan to recover the feed.',
     };
   }
 }

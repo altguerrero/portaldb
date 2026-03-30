@@ -1,8 +1,4 @@
-import {
-  selectAllFavorites,
-  selectFavoritesCount,
-  selectIsFavorite,
-} from './favorites.selectors';
+import { selectAllFavorites, selectFavoritesCount, selectIsFavorite } from './favorites.selectors';
 import { createCharacter } from '../../../testing/character.fixture';
 
 describe('favorites selectors', () => {

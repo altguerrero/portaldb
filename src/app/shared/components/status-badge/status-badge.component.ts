@@ -11,7 +11,5 @@ export class StatusBadgeComponent {
   readonly status = input.required<CharacterStatus>();
   readonly size = input<'sm' | 'md'>('md');
 
-  readonly label = computed(() =>
-    this.status() === 'unknown' ? 'Unknown' : this.status(),
-  );
+  readonly label = computed(() => (this.status() === 'unknown' ? 'Unknown' : this.status()));
 }

@@ -36,7 +36,8 @@ describe('CharactersService', () => {
 
     const requestPromise = firstValueFrom(service.getCharacters(3));
     const request = httpTesting.expectOne(
-      (req) => req.method === 'GET' && req.url === '/api/character' && req.params.get('page') === '3',
+      (req) =>
+        req.method === 'GET' && req.url === '/api/character' && req.params.get('page') === '3',
     );
 
     request.flush(response);

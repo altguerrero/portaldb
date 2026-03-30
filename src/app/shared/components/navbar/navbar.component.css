@@ -40,7 +40,10 @@
   color: var(--color-accent);
   text-transform: uppercase;
   text-shadow: var(--shadow-brand);
-  transition: color var(--transition-fast), text-shadow var(--transition-fast), opacity var(--transition-fast);
+  transition:
+    color var(--transition-fast),
+    text-shadow var(--transition-fast),
+    opacity var(--transition-fast);
 }
 
 .navbar__brand:hover {
@@ -71,7 +74,10 @@
   letter-spacing: 0.24em;
   line-height: 1;
   text-transform: uppercase;
-  transition: color var(--transition-fast), text-shadow var(--transition-fast), opacity var(--transition-fast);
+  transition:
+    color var(--transition-fast),
+    text-shadow var(--transition-fast),
+    opacity var(--transition-fast);
 }
 
 .navbar__link::after {

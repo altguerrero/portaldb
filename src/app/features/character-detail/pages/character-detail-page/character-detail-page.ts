@@ -77,10 +77,7 @@ export class CharacterDetailPage {
     this.retry$.next();
   }
 
-  private createViewModel(
-    character: Character,
-    isFavorite: boolean,
-  ): CharacterDetailViewModel {
+  private createViewModel(character: Character, isFavorite: boolean): CharacterDetailViewModel {
     return {
       state: 'ready',
       character,

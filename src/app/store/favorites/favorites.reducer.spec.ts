@@ -1,8 +1,4 @@
-import {
-  addFavorite,
-  loadFavoritesFromStorageSuccess,
-  removeFavorite,
-} from './favorites.actions';
+import { addFavorite, loadFavoritesFromStorageSuccess, removeFavorite } from './favorites.actions';
 import { favoritesReducer, initialState } from './favorites.reducer';
 import { createCharacter } from '../../../testing/character.fixture';
 
@@ -10,10 +6,7 @@ describe('favoritesReducer', () => {
   it('should hydrate state from storage', () => {
     const characters = [createCharacter(), createCharacter({ id: 2, name: 'Morty Smith' })];
 
-    const state = favoritesReducer(
-      initialState,
-      loadFavoritesFromStorageSuccess({ characters }),
-    );
+    const state = favoritesReducer(initialState, loadFavoritesFromStorageSuccess({ characters }));
 
     expect(state).toEqual({ characters });
   });

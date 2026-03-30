@@ -34,9 +34,9 @@ export class FavoritesPage {
 
   readonly routes = APP_ROUTES;
 
-  readonly vm$ = this.store.select(selectAllFavorites).pipe(
-    map((favorites) => this.createViewModel(favorites)),
-  );
+  readonly vm$ = this.store
+    .select(selectAllFavorites)
+    .pipe(map((favorites) => this.createViewModel(favorites)));
 
   removeFavorite(characterId: number): void {
     this.store.dispatch(removeFavorite({ id: String(characterId) }));

@@ -20,7 +20,9 @@
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  transition: color var(--transition-fast), transform var(--transition-fast);
+  transition:
+    color var(--transition-fast),
+    transform var(--transition-fast);
 }
 
 .detail-page__back-link:hover {
