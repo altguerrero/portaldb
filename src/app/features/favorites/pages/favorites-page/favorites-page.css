@@ -79,18 +79,12 @@
   padding: 1.2rem;
   border: var(--border-subtle);
   border-radius: var(--radius-lg);
-  background: linear-gradient(
-    180deg,
-    rgb(var(--color-surface-overlay-rgb) / 0.82),
-    rgb(var(--color-surface-overlay-rgb) / 0.44)
-  );
+  background: var(--surface-card-body);
 }
 
 .favorites-page__stat--primary {
   border: var(--border-accent);
-  background:
-    radial-gradient(circle at top right, rgb(var(--color-accent-rgb) / 0.12), transparent 36%),
-    linear-gradient(180deg, rgb(var(--color-surface-overlay-rgb) / 0.9), rgb(var(--color-surface-overlay-rgb) / 0.52));
+  background: var(--surface-card-overlay);
 }
 
 .favorites-page__stat-label {
@@ -130,7 +124,7 @@
   position: absolute;
   inset: 1rem auto 1rem 0;
   width: 2px;
-  background: linear-gradient(180deg, rgb(var(--color-accent-rgb) / 0.95), rgb(var(--color-accent-rgb) / 0.2));
+  background: linear-gradient(180deg, var(--color-accent), transparent);
   box-shadow: var(--shadow-line-accent-soft);
 }
 
@@ -217,9 +211,7 @@
   padding: 2rem;
   border: 1px dashed rgb(var(--color-accent-rgb) / 0.55);
   border-radius: var(--radius-xl);
-  background:
-    radial-gradient(circle at top center, rgb(var(--color-accent-rgb) / 0.08), transparent 40%),
-    linear-gradient(180deg, rgb(var(--color-surface-overlay-rgb) / 0.72), rgb(var(--color-surface-overlay-rgb) / 0.42));
+  background: var(--surface-card-overlay);
   text-align: center;
 }
 
