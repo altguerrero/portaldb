@@ -5,6 +5,7 @@ import {
   writeResponseToNodeResponse,
 } from '@angular/ssr/node';
 import express from 'express';
+import { createServer } from 'node:net';
 import { join } from 'node:path';
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
@@ -12,6 +13,25 @@ const upstreamApiUrl = process.env['RICK_API_URL'] || 'https://rickandmortyapi.c
 
 const app = express();
 const angularApp = new AngularNodeAppEngine();
+
+function ensurePortAvailable(port: number): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const tester = createServer()
+      .once('error', reject)
+      .once('listening', () => {
+        tester.close((error) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          resolve();
+        });
+      });
+
+    tester.listen(port);
+  });
+}
 
 /**
  * Proxy the Rick and Morty API through the SSR server to avoid browser CORS
@@ -87,14 +107,30 @@ app.use((req, res, next) => {
  * The server listens on the port defined by the `PORT` environment variable, or defaults to 4000.
  */
 if (isMainModule(import.meta.url) || process.env['pm_id']) {
-  const port = process.env['PORT'] || 4000;
-  app.listen(port, (error) => {
-    if (error) {
-      throw error;
-    }
+  const port = Number(process.env['PORT'] || 4000);
 
-    console.log(`Node Express server listening on http://localhost:${port}`);
-  });
+  void ensurePortAvailable(port)
+    .then(() => {
+      const server = app.listen(port, () => {
+        console.log(`Node Express server listening on http://localhost:${port}`);
+      });
+
+      server.on('error', (error: NodeJS.ErrnoException) => {
+        console.error(error);
+        process.exit(1);
+      });
+    })
+    .catch((error: NodeJS.ErrnoException) => {
+      if (error.code === 'EADDRINUSE') {
+        console.error(
+          `Port ${port} is already in use. Free it or run the server on another port, for example: PORT=4010 npm run serve:ssr:portaldb`,
+        );
+        process.exit(1);
+      }
+
+      console.error(error);
+      process.exit(1);
+    });
 }
 
 /**
