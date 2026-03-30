@@ -146,11 +146,78 @@
       <section class="detail-page detail-page--state" aria-live="polite" aria-busy="true">
         <p class="detail-page__eyebrow">Loading Record</p>
 
-        <h1 class="detail-page__title">Scanning Multiversal Registry</h1>
+        <div class="detail-page__layout detail-page__layout--loading">
+          <article class="detail-page__media-card detail-page__skeleton-card">
+            <div class="detail-page__skeleton-header">
+              <span class="detail-page__skeleton-pill" style="width: 8.8rem"></span>
+              <span class="detail-page__skeleton-pill" style="width: 7.2rem"></span>
+            </div>
 
-        <p class="detail-page__description">
-          Synchronizing subject metadata, travel logs and favorites state.
-        </p>
+            <div class="detail-page__skeleton-portrait"></div>
+
+            <div class="detail-page__skeleton-meta-grid">
+              <div class="detail-page__skeleton-meta-card">
+                <span class="detail-page__skeleton-line" style="width: 32%; height: 0.68rem"></span>
+                <span class="detail-page__skeleton-line" style="width: 56%; height: 1.15rem"></span>
+              </div>
+
+              <div class="detail-page__skeleton-meta-card">
+                <span class="detail-page__skeleton-line" style="width: 32%; height: 0.68rem"></span>
+                <span class="detail-page__skeleton-line" style="width: 56%; height: 1.15rem"></span>
+              </div>
+            </div>
+          </article>
+
+          <article class="detail-page__profile-card detail-page__skeleton-card">
+            <div class="detail-page__skeleton-copy">
+              <span class="detail-page__skeleton-line" style="width: 32%; height: 0.68rem"></span>
+              <span
+                class="detail-page__skeleton-line"
+                style="width: 62%; height: 3rem; border-radius: var(--radius-md)"
+              ></span>
+              <span class="detail-page__skeleton-line"></span>
+              <span class="detail-page__skeleton-line" style="width: 84%"></span>
+            </div>
+
+            <div class="detail-page__divider"></div>
+
+            <div class="detail-page__skeleton-facts">
+              @for (item of [0, 1, 2, 3, 4, 5]; track item) {
+                <div class="detail-page__skeleton-fact">
+                  <span
+                    class="detail-page__skeleton-line"
+                    style="width: 32%; height: 0.68rem"
+                  ></span>
+                  <span
+                    class="detail-page__skeleton-line"
+                    style="width: 56%; height: 1.15rem"
+                  ></span>
+                </div>
+              }
+            </div>
+
+            <div class="detail-page__skeleton-stats">
+              @for (item of [0, 1, 2]; track item) {
+                <div class="detail-page__skeleton-stat-card">
+                  <span
+                    class="detail-page__skeleton-line"
+                    style="width: 32%; height: 0.68rem"
+                  ></span>
+                  <span
+                    class="detail-page__skeleton-line"
+                    style="width: 42%; height: 2.6rem; border-radius: var(--radius-md)"
+                  ></span>
+                  <span class="detail-page__skeleton-line" style="width: 84%"></span>
+                </div>
+              }
+            </div>
+
+            <div class="detail-page__skeleton-actions">
+              <span class="detail-page__skeleton-button" style="width: 14rem"></span>
+              <span class="detail-page__skeleton-button" style="width: 12rem"></span>
+            </div>
+          </article>
+        </div>
       </section>
     }
 

@@ -1,6 +1,7 @@
 .not-found-page {
   display: grid;
   gap: 1.5rem;
+  animation: reveal-up var(--motion-duration-hero) var(--motion-ease-decelerate) both;
 }
 
 .not-found-page__eyebrow {
@@ -25,6 +26,7 @@
   letter-spacing: 0.08em;
   line-height: 0.9;
   text-transform: uppercase;
+  animation: soft-float 5.5s ease-in-out 300ms infinite;
 }
 
 .not-found-page__copy {
@@ -52,6 +54,7 @@
   flex-wrap: wrap;
   gap: 1rem;
   padding-top: 0.5rem;
+  animation: reveal-up var(--motion-duration-card) var(--motion-ease-glide) 180ms both;
 }
 
 @media (max-width: 768px) {

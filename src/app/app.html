@@ -3,8 +3,9 @@
 
   <app-navbar />
 
-  <main class="app-content">
-    <router-outlet />
+  <main class="app-content" [class.app-content--routing]="isRouteTransitioning()">
+    <div class="app-content__route-veil"></div>
+    <router-outlet (activate)="handleRouteActivate()" />
   </main>
 
   <footer class="app-footer">

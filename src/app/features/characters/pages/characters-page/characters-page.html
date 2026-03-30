@@ -1,7 +1,11 @@
 @if (vm$ | async; as vm) {
-  <section #pageTop class="characters-page">
+  <section
+    #pageTop
+    class="characters-page u-reveal-page"
+    [class.characters-page--scanning]="isPageScanning()"
+  >
     <div class="characters-page__hero">
-      <div class="characters-page__heading">
+      <div class="characters-page__heading u-reveal-heading">
         <h1 class="characters-page__title">
           Character
           <span class="characters-page__title-accent"> Registry </span>
@@ -10,7 +14,7 @@
         <div class="characters-page__rule"></div>
       </div>
 
-      <div class="characters-page__intro">
+      <div class="characters-page__intro u-reveal-intro">
         <span class="characters-page__intro-bar"></span>
 
         <p class="characters-page__intro-text">
@@ -23,6 +27,7 @@
       @case ('loading') {
         <div
           class="characters-page__grid characters-page__grid--loading"
+          [class.characters-page__grid--scanning]="isPageScanning()"
           aria-label="Loading characters"
           aria-busy="true"
         >
@@ -47,18 +52,31 @@
       }
 
       @case ('ready') {
-        <div class="characters-page__grid">
-          @for (character of vm.characters; track character.id) {
-            <app-character-card [character]="character" />
+        <div
+          class="characters-page__grid"
+          [class.characters-page__grid--scanning]="isPageScanning()"
+        >
+          @for (character of vm.characters; track character.id; let index = $index) {
+            <app-character-card
+              class="u-stagger-reveal"
+              [character]="character"
+              style="--stagger-base: 60ms; --stagger-step: 60ms"
+              [style.--stagger-order]="index"
+            />
           }
         </div>
 
-        <app-pagination
-          ariaLabel="Characters pagination"
-          [currentPage]="vm.page"
-          [totalPages]="vm.totalPages"
-          (pageChange)="goToPage($event, vm.totalPages)"
-        />
+        <div
+          class="characters-page__pagination-shell"
+          [class.characters-page__pagination-shell--scanning]="isPageScanning()"
+        >
+          <app-pagination
+            ariaLabel="Characters pagination"
+            [currentPage]="vm.page"
+            [totalPages]="vm.totalPages"
+            (pageChange)="goToPage($event, vm.totalPages)"
+          />
+        </div>
       }
 
       @case ('empty') {

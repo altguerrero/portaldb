@@ -37,6 +37,10 @@
   box-shadow: var(--shadow-status-dot);
 }
 
+.status-badge--alive .status-badge__dot {
+  animation: pulse-opacity 1.8s ease-in-out infinite;
+}
+
 .status-badge--alive {
   color: var(--color-accent-ink);
   background: var(--surface-status-alive);

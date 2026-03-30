@@ -10,12 +10,26 @@
   background: var(--surface-app);
 }
 
+.app-shell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 15% 18%, rgb(var(--color-accent-rgb) / 0.08), transparent 22%),
+    radial-gradient(circle at 85% 12%, rgb(var(--color-accent-rgb) / 0.06), transparent 18%);
+  opacity: 0.72;
+  animation: ambient-drift 16s ease-in-out infinite;
+}
+
 .app-shell__glow {
   position: absolute;
   inset: 0;
   pointer-events: none;
   background: var(--surface-app-glow);
   opacity: 0.9;
+  transform-origin: top center;
+  animation: ambient-drift 18s ease-in-out infinite reverse;
 }
 
 .app-content {
@@ -24,6 +38,45 @@
   width: min(var(--layout-content-max), calc(100% - 3rem));
   margin: 0 auto;
   padding: 4rem 0 7rem;
+  transition:
+    transform var(--transition-base),
+    filter var(--transition-base),
+    opacity var(--transition-fast);
+}
+
+.app-content__route-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: calc(var(--radius-xl) + 0.25rem);
+  background:
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      rgb(var(--color-accent-rgb) / 0.05) 40%,
+      rgb(var(--color-accent-rgb) / 0.16) 50%,
+      rgb(var(--color-text-primary-rgb) / 0.04) 56%,
+      transparent 100%
+    ),
+    repeating-linear-gradient(
+      180deg,
+      rgb(var(--color-accent-rgb) / 0.03) 0 1px,
+      transparent 1px 14px
+    );
+  opacity: 0;
+  transform: translateY(-18%);
+  pointer-events: none;
+}
+
+.app-content--routing {
+  transform: translateY(0.35rem) scale(0.995);
+  filter: blur(3px) saturate(0.94);
+  opacity: 0.92;
+}
+
+.app-content--routing .app-content__route-veil {
+  opacity: 1;
+  animation: app-route-scan 540ms linear infinite;
 }
 
 .app-footer {
@@ -35,6 +88,17 @@
   letter-spacing: 0.24em;
   text-align: center;
   text-transform: uppercase;
+  animation: reveal-up 620ms var(--motion-ease-decelerate) 220ms both;
+}
+
+@keyframes app-route-scan {
+  0% {
+    transform: translateY(-18%);
+  }
+
+  100% {
+    transform: translateY(18%);
+  }
 }
 
 @media (max-width: 768px) {

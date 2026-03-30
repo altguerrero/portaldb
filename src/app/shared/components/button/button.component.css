@@ -39,6 +39,12 @@
   transform: translateY(-2px);
 }
 
+.ui-button:focus-visible {
+  outline: none;
+  border-color: rgb(var(--color-accent-rgb) / 0.82);
+  box-shadow: var(--shadow-focus-ring);
+}
+
 .ui-button:disabled,
 .ui-button[aria-disabled='true'] {
   opacity: 0.6;
@@ -75,4 +81,12 @@
   border-color: rgb(var(--color-danger-rgb) / 0.85);
   background: rgb(var(--color-danger-rgb) / 0.08);
   box-shadow: var(--shadow-pill-danger);
+}
+
+.ui-button--danger:focus-visible {
+  border-color: rgb(var(--color-danger-rgb) / 0.85);
+  box-shadow:
+    0 0 0 1px rgb(var(--color-danger-rgb) / 0.92),
+    0 0 0 4px rgb(var(--color-danger-rgb) / 0.16),
+    0 0 16px rgb(var(--color-danger-rgb) / 0.18);
 }

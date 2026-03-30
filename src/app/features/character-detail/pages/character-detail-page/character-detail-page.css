@@ -4,6 +4,18 @@
   width: min(100%, var(--layout-page-max));
   margin: 0 auto;
   padding-top: 1.5rem;
+  animation: reveal-up var(--motion-duration-hero) var(--motion-ease-decelerate) both;
+}
+
+@keyframes detail-portrait-drift {
+  0%,
+  100% {
+    transform: scale(1.035) translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: scale(1.05) translate3d(0, -0.45rem, 0);
+  }
 }
 
 .detail-page--state {
@@ -23,11 +35,20 @@
   transition:
     color var(--transition-fast),
     transform var(--transition-fast);
+  animation: reveal-side-left var(--motion-duration-card) var(--motion-ease-glide) 80ms both;
 }
 
 .detail-page__back-link:hover {
   color: var(--color-accent);
   transform: translateX(-2px);
+}
+
+.detail-page__back-link:focus-visible {
+  outline: none;
+  color: var(--color-accent);
+  transform: translateX(-2px);
+  box-shadow: var(--shadow-focus-ring);
+  border-radius: var(--radius-sm);
 }
 
 .detail-page__back-icon {
@@ -55,6 +76,106 @@
   display: grid;
   gap: 1.25rem;
   padding: 1.25rem;
+  animation: reveal-side-left var(--motion-duration-hero) var(--motion-ease-decelerate) 120ms both;
+}
+
+.detail-page__skeleton-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(var(--color-text-primary-rgb) / 0.06) 45%,
+    transparent
+  );
+  transform: translateX(-100%);
+  animation: detail-page-shimmer 1.35s ease-in-out infinite;
+}
+
+.detail-page__skeleton-meta-card,
+.detail-page__skeleton-stat-card,
+.detail-page__skeleton-copy,
+.detail-page__skeleton-fact,
+.detail-page__skeleton-meta-grid,
+.detail-page__skeleton-facts,
+.detail-page__skeleton-stats {
+  display: grid;
+}
+
+.detail-page__skeleton-header,
+.detail-page__skeleton-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.detail-page__skeleton-pill,
+.detail-page__skeleton-button,
+.detail-page__skeleton-line {
+  display: block;
+  background: rgb(var(--color-text-primary-rgb) / 0.08);
+}
+
+.detail-page__skeleton-pill,
+.detail-page__skeleton-line {
+  border-radius: var(--radius-full);
+}
+
+.detail-page__skeleton-button {
+  height: 3.25rem;
+  border-radius: var(--radius-md);
+}
+
+.detail-page__skeleton-portrait {
+  min-height: 28rem;
+  border-radius: calc(var(--radius-lg) - 0.1rem);
+  background:
+    radial-gradient(circle at top center, rgb(var(--color-accent-rgb) / 0.14), transparent 38%),
+    linear-gradient(
+      180deg,
+      rgb(var(--color-surface-card-top-rgb) / 0.95),
+      rgb(var(--color-surface-overlay-rgb) / 0.98)
+    );
+}
+
+.detail-page__skeleton-meta-grid,
+.detail-page__skeleton-facts,
+.detail-page__skeleton-stats {
+  gap: 1rem;
+}
+
+.detail-page__skeleton-meta-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.detail-page__skeleton-meta-card,
+.detail-page__skeleton-stat-card {
+  gap: 0.55rem;
+  padding: 1rem;
+  border: var(--border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--surface-card-body);
+}
+
+.detail-page__skeleton-copy,
+.detail-page__skeleton-fact {
+  gap: 0.55rem;
+}
+
+.detail-page__skeleton-fact {
+  padding: 1rem 0;
+  border-bottom: var(--border-divider);
+}
+
+.detail-page__skeleton-fact:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.detail-page__skeleton-line {
+  height: 0.92rem;
 }
 
 .detail-page__media-header,
@@ -81,10 +202,6 @@
   text-transform: uppercase;
 }
 
-.detail-page__status-badge {
-  align-self: flex-start;
-}
-
 .detail-page__portrait-shell {
   min-height: 28rem;
   padding: 0.75rem;
@@ -109,6 +226,9 @@
   height: 100%;
   object-fit: cover;
   object-position: center top;
+  transform: scale(1.035);
+  transform-origin: center top;
+  animation: detail-portrait-drift 6s ease-in-out 700ms infinite;
 }
 
 .detail-page__media-footer {
@@ -141,13 +261,13 @@
   font-family: var(--font-display);
   font-size: 1rem;
   font-weight: 700;
-  line-height: 1.1;
 }
 
 .detail-page__profile-card {
   display: grid;
   gap: 1.5rem;
   padding: 1.5rem;
+  animation: reveal-side-right var(--motion-duration-hero) var(--motion-ease-decelerate) 180ms both;
 }
 
 .detail-page__profile-header {
@@ -226,11 +346,21 @@
   border: var(--border-subtle);
   border-radius: var(--radius-lg);
   background: var(--surface-card-body);
+  transition:
+    transform var(--transition-base),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
 .detail-page__stat--primary {
   border: var(--border-accent);
   background: var(--surface-card-overlay);
+}
+
+.detail-page__stat:hover {
+  transform: translateY(-3px);
+  border-color: rgb(var(--color-accent-rgb) / 0.28);
+  box-shadow: var(--shadow-card);
 }
 
 .detail-page__stat-value {
@@ -252,7 +382,12 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  padding-top: 0.25rem;
+}
+
+@keyframes detail-page-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 @media (min-width: 768px) {
@@ -274,7 +409,20 @@
     min-height: 7.4rem;
   }
 
+  .detail-page__skeleton-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 1.25rem;
+  }
+
+  .detail-page__skeleton-fact {
+    min-height: 7.4rem;
+  }
+
   .detail-page__stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .detail-page__skeleton-stats {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
@@ -297,20 +445,30 @@
   .detail-page__portrait-frame {
     min-height: 32.5rem;
   }
+
+  .detail-page__skeleton-portrait {
+    min-height: 34rem;
+  }
 }
 
 @media (max-width: 767px) {
   .detail-page__media-header,
   .detail-page__media-footer,
+  .detail-page__skeleton-header,
+  .detail-page__skeleton-actions,
+  .detail-page__skeleton-meta-grid,
   .detail-page__actions {
     grid-template-columns: 1fr;
   }
 
   .detail-page__media-header,
+  .detail-page__skeleton-header,
+  .detail-page__skeleton-actions,
   .detail-page__actions {
     display: grid;
   }
 
+  .detail-page__skeleton-button,
   .detail-page__actions app-button {
     width: 100%;
   }
@@ -322,5 +480,9 @@
 
   .detail-page__portrait-frame {
     min-height: 20.5rem;
+  }
+
+  .detail-page__skeleton-portrait {
+    min-height: 22rem;
   }
 }
