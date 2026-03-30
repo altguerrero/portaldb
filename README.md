@@ -10,6 +10,7 @@ Mini aplicación en Angular inspirada en el universo de Rick and Morty. La app c
 - NgRx Store + Effects con persistencia en `localStorage`
 - Proxy Express para consumo de API sin problemas de CORS
 - Dockerfile multi-stage para ejecución local en contenedor
+- GitHub Actions CI con lint, typecheck, tests con cobertura y build
 
 ## Screenshots
 
@@ -37,6 +38,8 @@ Portaldb está pensado como una SPA moderna con foco en experiencia de usuario y
 - NgRx Store + Effects
 - Express para SSR y proxy de API
 - Vitest para unit tests
+- ESLint + Prettier + Husky + lint-staged
+- GitHub Actions para validación continua
 - Docker multi-stage build
 
 ## Arquitectura resumida
@@ -91,10 +94,19 @@ PORT=4010 npm run serve:ssr:portaldb
 
 ```bash
 npm start                # servidor de desarrollo
+npm run lint             # eslint
+npm run typecheck        # chequeo de tipos TS
 npm run build            # build browser + server
 npm test -- --watch=false
+npm run validate         # format + lint + typecheck + test + build
 npm run serve:ssr:portaldb
 ```
+
+## Calidad y automatización
+
+- GitHub Actions ejecuta el pipeline de CI en cada `push` y `pull_request`.
+- El workflow valida formato, `lint`, `typecheck`, tests con cobertura y `build`.
+- Husky + `lint-staged` corren en `pre-commit` para aplicar `eslint --fix` y `prettier --write` solo sobre archivos staged.
 
 ## Technical validation
 
@@ -161,7 +173,9 @@ Si no se define, usa ese valor por defecto.
 Se verificó localmente lo siguiente:
 
 - `npm run build`
-- `npm test -- --watch=false`
+- `npm run lint`
+- `npm run typecheck`
+- `npm test -- --watch=false --coverage --coverage-reporters=text-summary`
 - Respuesta `200 OK` en `/characters` levantando el servidor SSR compilado
 - HTML SSR con personajes renderizados en la respuesta inicial
 
