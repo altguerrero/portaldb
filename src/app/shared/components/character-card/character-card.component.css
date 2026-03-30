@@ -18,6 +18,23 @@
     box-shadow var(--transition-base);
 }
 
+@keyframes character-card-sweep {
+  0% {
+    transform: translate3d(-42%, 0, 0) rotate(8deg);
+    opacity: 0;
+  }
+
+  18%,
+  82% {
+    opacity: 0.75;
+  }
+
+  100% {
+    transform: translate3d(42%, 0, 0) rotate(8deg);
+    opacity: 0;
+  }
+}
+
 .character-card::before {
   content: '';
   position: absolute;
@@ -27,13 +44,44 @@
   pointer-events: none;
 }
 
+.character-card::after {
+  content: '';
+  position: absolute;
+  inset: -22%;
+  background: linear-gradient(
+    115deg,
+    transparent 36%,
+    rgb(var(--color-text-primary-rgb) / 0.04) 47%,
+    rgb(var(--color-accent-rgb) / 0.18) 50%,
+    rgb(var(--color-text-primary-rgb) / 0.04) 53%,
+    transparent 64%
+  );
+  opacity: 0;
+  pointer-events: none;
+}
+
 .character-card:hover {
   transform: translateY(-6px);
   border-color: var(--color-accent);
   box-shadow: var(--shadow-card-hover);
 }
 
+.character-card:focus-visible {
+  outline: none;
+  transform: translateY(-6px);
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-card-hover), var(--shadow-focus-ring);
+}
+
+.character-card:hover::after {
+  animation: character-card-sweep 980ms linear 1;
+}
+
 .character-card:hover .character-card__image {
+  transform: scale(1.05);
+}
+
+.character-card:focus-visible .character-card__image {
   transform: scale(1.05);
 }
 
@@ -71,6 +119,7 @@
   right: 16px;
   display: inline-flex;
   z-index: 2;
+  transition: transform var(--transition-base);
 }
 
 .character-card__registry {
@@ -91,6 +140,19 @@
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
+  transition:
+    border-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.character-card:hover .character-card__status,
+.character-card:hover .character-card__registry {
+  transform: translateY(-2px);
+}
+
+.character-card:focus-visible .character-card__status,
+.character-card:focus-visible .character-card__registry {
+  transform: translateY(-2px);
 }
 
 .character-card__registry-tag {

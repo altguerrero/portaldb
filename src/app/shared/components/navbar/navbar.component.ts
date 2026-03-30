@@ -25,7 +25,7 @@ export class NavbarComponent {
   readonly routes = APP_ROUTES;
 
   readonly navLinks: NavLink[] = [
-    { label: 'CHARACTERS', path: APP_ROUTES.characters, exact: true },
+    { label: 'CHARACTERS', path: APP_ROUTES.characters, exact: false },
     { label: 'FAVORITES', path: APP_ROUTES.favorites, exact: false },
   ];
 

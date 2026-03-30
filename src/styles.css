@@ -187,10 +187,17 @@
   --shadow-pill-neutral: 0 0 18px rgb(var(--color-text-muted-rgb) / 0.18);
   --shadow-status-dot: 0 0 10px currentColor;
   --shadow-badge-accent: inset 0 0 0 1px rgb(var(--color-accent-rgb) / 0.28);
+  --shadow-focus-ring:
+    0 0 0 1px rgb(var(--color-accent-rgb) / 0.9), 0 0 0 4px rgb(var(--color-accent-rgb) / 0.18),
+    0 0 18px rgb(var(--color-accent-rgb) / 0.18);
 
   --transition-fast: 180ms ease;
   --transition-base: 220ms ease;
   --transition-slow: 260ms ease;
+  --motion-ease-decelerate: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-ease-glide: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-duration-hero: 680ms;
+  --motion-duration-card: 560ms;
 }
 
 @keyframes pulse-opacity {
@@ -201,6 +208,66 @@
 
   50% {
     opacity: 0.3;
+  }
+}
+
+@keyframes ambient-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.78;
+  }
+
+  50% {
+    transform: translate3d(0, 1.5rem, 0) scale(1.04);
+    opacity: 1;
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1.25rem, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes reveal-side-left {
+  from {
+    opacity: 0;
+    transform: translate3d(-1.5rem, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes reveal-side-right {
+  from {
+    opacity: 0;
+    transform: translate3d(1.5rem, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes soft-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -0.5rem, 0);
   }
 }
 
@@ -229,4 +296,35 @@ a {
 
 .pulse-dot {
   animation: pulse-opacity 2s ease-in-out infinite;
+}
+
+.u-reveal-page {
+  animation: reveal-up var(--motion-duration-hero) var(--motion-ease-decelerate) both;
+}
+
+.u-reveal-heading {
+  animation: reveal-up var(--motion-duration-hero) var(--motion-ease-decelerate) 80ms both;
+}
+
+.u-reveal-intro {
+  animation: reveal-up var(--motion-duration-hero) var(--motion-ease-decelerate) 180ms both;
+}
+
+.u-stagger-reveal {
+  opacity: 0;
+  animation: reveal-up var(--motion-duration-card) var(--motion-ease-glide) both;
+  animation-delay: calc(
+    var(--stagger-base, 0ms) + var(--stagger-order, 0) * var(--stagger-step, 80ms)
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

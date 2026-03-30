@@ -1,8 +1,8 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, ElementRef, inject, viewChild } from '@angular/core';
+import { Component, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { catchError, distinctUntilChanged, map, startWith, switchMap } from 'rxjs/operators';
+import { catchError, distinctUntilChanged, map, startWith, switchMap, tap } from 'rxjs/operators';
 
 import { CharactersService } from '../../../../core/services/characters.service';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
@@ -35,6 +35,7 @@ export class CharactersPage {
   private readonly retry$ = new Subject<void>();
 
   readonly skeletonCards = Array.from({ length: 8 }, (_, index) => index);
+  readonly isPageScanning = signal(false);
 
   readonly page$ = this.route.queryParamMap.pipe(
     map((params) => Number(params.get('page') ?? '1')),
@@ -62,10 +63,21 @@ export class CharactersPage {
         ),
       ),
     ),
+    tap((vm) => {
+      if (vm.state !== 'loading') {
+        this.isPageScanning.set(false);
+      }
+    }),
   );
 
   goToPage(targetPage: number, totalPages: number): void {
     const safeTargetPage = Math.min(Math.max(targetPage, 1), totalPages);
+
+    if (safeTargetPage === this.currentPageSnapshot()) {
+      return;
+    }
+
+    this.isPageScanning.set(true);
 
     void this.router
       .navigate([], {
@@ -76,6 +88,8 @@ export class CharactersPage {
       .then((didNavigate) => {
         if (didNavigate) {
           this.scrollToResultsTop();
+        } else {
+          this.isPageScanning.set(false);
         }
       });
   }
@@ -89,6 +103,11 @@ export class CharactersPage {
       behavior: 'smooth',
       block: 'start',
     });
+  }
+
+  private currentPageSnapshot(): number {
+    const currentPage = Number(this.route.snapshot.queryParamMap.get('page') ?? '1');
+    return Number.isNaN(currentPage) || currentPage < 1 ? 1 : currentPage;
   }
 
   private createLoadingViewModel(page: number): CharactersPageViewModel {
