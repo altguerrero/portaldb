@@ -1,0 +1,109 @@
+@if (vm$ | async; as vm) {
+  <section class="favorites-page">
+    <div class="favorites-page__hero">
+      <div class="favorites-page__heading">
+        <p class="favorites-page__eyebrow">Saved Dimensions</p>
+
+        <h1 class="favorites-page__title">
+          Multiverse
+          <span class="favorites-page__title-accent"> Favorites </span>
+        </h1>
+
+        <div class="favorites-page__rule"></div>
+      </div>
+
+      <div class="favorites-page__intro">
+        <span class="favorites-page__intro-bar"></span>
+
+        <p class="favorites-page__description">
+          Stored biological records for high-priority entities you want immediate access to.
+        </p>
+      </div>
+    </div>
+
+    <div class="favorites-page__stats">
+      <article class="favorites-page__stat favorites-page__stat--primary">
+        <p class="favorites-page__stat-label">Saved Profiles</p>
+        <p class="favorites-page__stat-value">{{ vm.totalFavorites }}</p>
+      </article>
+
+      <article class="favorites-page__stat">
+        <p class="favorites-page__stat-label">Live Signatures</p>
+        <p class="favorites-page__stat-value">{{ vm.aliveCount }}</p>
+      </article>
+
+      <article class="favorites-page__stat">
+        <p class="favorites-page__stat-label">Origin Worlds</p>
+        <p class="favorites-page__stat-value">{{ vm.uniqueOrigins }}</p>
+      </article>
+    </div>
+
+    @if (vm.favorites.length > 0) {
+      <div class="favorites-page__list">
+        @for (item of vm.favorites; track item.character.id) {
+          <article class="favorites-page__item">
+            <a
+              [routerLink]="routes.characterDetail(item.character.id)"
+              class="favorites-page__item-main"
+            >
+              <div class="favorites-page__media">
+                <img
+                  [src]="item.character.image"
+                  [alt]="item.character.name"
+                  class="favorites-page__image"
+                />
+
+                <span class="favorites-page__registry">{{ item.registryId }}</span>
+              </div>
+
+              <div class="favorites-page__content">
+                <h2 class="favorites-page__name">{{ item.character.name }}</h2>
+
+                <p class="favorites-page__meta">
+                  <span>Species: {{ item.character.species }}</span>
+                  <span>Origin: {{ item.character.origin.name }}</span>
+                  <span>Location: {{ item.character.location.name }}</span>
+                </p>
+              </div>
+            </a>
+
+            <div class="favorites-page__item-side">
+              <div class="favorites-page__status">
+                <app-status-badge [status]="item.character.status" size="sm" />
+              </div>
+
+              <div class="favorites-page__item-actions">
+                <app-button
+                  label="Open Profile"
+                  [routerLink]="routes.characterDetail(item.character.id)"
+                  variant="ghost"
+                />
+
+                <app-button
+                  label="Remove"
+                  variant="danger"
+                  (pressed)="removeFavorite(item.character.id)"
+                />
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+    } @else {
+      <section class="favorites-page__empty">
+        <div class="favorites-page__empty-card">
+          <p class="favorites-page__empty-icon">✦</p>
+
+          <h2 class="favorites-page__empty-title">The Log Is Empty</h2>
+
+          <p class="favorites-page__empty-copy">
+            No characters saved yet. Explore the registry and pin the entities you want to keep in
+            reach.
+          </p>
+        </div>
+
+        <app-button label="Explore Characters" [routerLink]="routes.characters" variant="primary" />
+      </section>
+    }
+  </section>
+}

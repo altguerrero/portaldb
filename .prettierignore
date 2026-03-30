@@ -1,0 +1,7 @@
+.angular
+.codex-venv
+.git
+coverage
+dist
+node_modules
+out-tsc

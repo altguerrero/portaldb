@@ -1,59 +1,186 @@
 # Portaldb
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.5.
+Mini aplicación en Angular inspirada en el universo de Rick and Morty. La app consume la Rick and Morty API, renderiza la grilla principal con SSR, muestra una vista de detalle por personaje y gestiona favoritos persistidos con NgRx + `localStorage`.
 
-## Development server
+## Highlights
 
-To start a local development server, run:
+- `/characters`: grilla responsive con SSR y paginación
+- `/characters/:id`: detalle con más de 5 campos relevantes
+- `/favorites`: listado de favoritos persistidos
+- NgRx Store + Effects con persistencia en `localStorage`
+- Proxy Express para consumo de API sin problemas de CORS
+- Dockerfile multi-stage para ejecución local en contenedor
+- GitHub Actions CI con lint, typecheck, tests con cobertura y build
+
+## Screenshots
+
+![Characters](./public/readme/characters.png)
+![Character detail](./public/readme/detail.png)
+![Favorites](./public/readme/favorites.png)
+
+## Why this project
+
+Portaldb está pensado como una SPA moderna con foco en experiencia de usuario y fundamentos frontend sólidos: renderizado híbrido, manejo de estado predecible, persistencia local y una estructura mantenible basada en features.
+
+## Key technical decisions
+
+- SSR en `/characters` para entregar contenido útil desde la primera respuesta y mejorar la carga inicial de la vista principal.
+- `RenderMode.Client` en `/favorites` porque depende de estado persistido localmente en navegador.
+- NgRx para centralizar favoritos, reflejar el estado en múltiples vistas y simplificar la persistencia.
+- Proxy Express en `/api/*` para unificar el consumo de datos entre SSR y CSR y evitar problemas de CORS.
+- Separación por features para mantener rutas, páginas y estado agrupados por dominio.
+
+## Stack técnico
+
+- Angular 21
+- Angular SSR con `@angular/ssr`
+- Standalone components
+- NgRx Store + Effects
+- Express para SSR y proxy de API
+- Vitest para unit tests
+- ESLint + Prettier + Husky + lint-staged
+- GitHub Actions para validación continua
+- Docker multi-stage build
+
+## Arquitectura resumida
+
+- `src/app/features/characters`: grilla SSR con paginación.
+- `src/app/features/character-detail`: detalle del personaje.
+- `src/app/features/favorites`: listado de favoritos persistidos.
+- `src/app/store/favorites`: acciones, reducer, selectors y effects de NgRx.
+- `src/app/core/services/characters.service.ts`: consumo de API.
+- `src/server.ts`: servidor Express SSR y proxy hacia Rick and Morty API.
+- `src/app/app.routes.server.ts`: estrategia de render por ruta.
+
+## Cómo ejecutar localmente
+
+### Prerrequisitos
+
+- Node.js 20 o superior
+- npm 10 o superior
+
+### Instalación
 
 ```bash
-ng serve
+npm install
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Desarrollo
 
 ```bash
-ng generate component component-name
+npm start
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+La app queda disponible en `http://localhost:4200`.
+
+### Ejecución SSR
+
+Para levantar la versión compilada con SSR:
 
 ```bash
-ng generate --help
+npm run build
+npm run serve:ssr:portaldb
 ```
 
-## Building
+La app queda disponible en `http://localhost:4000`.
 
-To build the project run:
+Si el puerto `4000` ya está ocupado, puedes usar otro:
 
 ```bash
-ng build
+PORT=4010 npm run serve:ssr:portaldb
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Scripts disponibles
 
 ```bash
-ng test
+npm start                # servidor de desarrollo
+npm run lint             # eslint
+npm run typecheck        # chequeo de tipos TS
+npm run build            # build browser + server
+npm test -- --watch=false
+npm run validate         # format + lint + typecheck + test + build
+npm run serve:ssr:portaldb
 ```
 
-## Running end-to-end tests
+## Calidad y automatización
 
-For end-to-end (e2e) testing, run:
+- GitHub Actions ejecuta el pipeline de CI en cada `push` y `pull_request`.
+- El workflow valida formato, `lint`, `typecheck`, tests con cobertura y `build`.
+- Husky + `lint-staged` corren en `pre-commit` para aplicar `eslint --fix` y `prettier --write` solo sobre archivos staged.
+
+## Technical validation
+
+### 1. Validar SSR en la grilla
+
+Luego abre `http://localhost:4000/characters` o valida por consola:
 
 ```bash
-ng e2e
+curl -s http://localhost:4000/characters | grep "Rick Sanchez"
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Si el HTML ya contiene personajes antes de hidratar en navegador, la grilla está siendo entregada con SSR.
 
-## Additional Resources
+Si levantaste el servidor con otro puerto, reemplaza `4000` por el puerto elegido.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### 2. Validar detalle
+
+Abre cualquier personaje desde la grilla o entra directo a una ruta como:
+
+```bash
+http://localhost:4000/characters/1
+```
+
+La vista muestra más de 5 campos relevantes, incluyendo nombre, estado, especie, género, origen, ubicación, episodios y fecha de creación.
+
+### 3. Validar favoritos persistidos
+
+1. Entra al detalle de un personaje.
+2. Presiona `Add To Favorites`.
+3. Ve a `/favorites` y confirma que aparece en la lista.
+4. Recarga la aplicación.
+5. Verifica que el favorito siga presente.
+
+La persistencia se realiza con NgRx y `localStorage` bajo la clave `portaldb_favorites`.
+
+## Docker
+
+Construcción de imagen:
+
+```bash
+docker build -t portaldb .
+```
+
+Ejecución del contenedor:
+
+```bash
+docker run --rm -p 4000:4000 portaldb
+```
+
+Luego abre `http://localhost:4000`.
+
+## Variable de entorno opcional
+
+El servidor SSR permite redefinir la API upstream:
+
+```bash
+RICK_API_URL=https://rickandmortyapi.com/api
+```
+
+Si no se define, usa ese valor por defecto.
+
+## Validaciones ejecutadas
+
+Se verificó localmente lo siguiente:
+
+- `npm run build`
+- `npm run lint`
+- `npm run typecheck`
+- `npm test -- --watch=false --coverage --coverage-reporters=text-summary`
+- Respuesta `200 OK` en `/characters` levantando el servidor SSR compilado
+- HTML SSR con personajes renderizados en la respuesta inicial
+
+## Notas de implementación
+
+- La página de favoritos está marcada como `RenderMode.Client` porque depende del estado persistido localmente en el navegador.
+- La grilla y el detalle sí están configurados con renderizado de servidor.
+- El proxy en Express evita problemas de CORS y mantiene un único origen tanto para SSR como para CSR.

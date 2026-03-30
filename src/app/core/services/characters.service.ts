@@ -12,7 +12,7 @@ export class CharactersService {
   private readonly http = inject(HttpClient);
   private readonly apiUrl = environment.apiUrl;
 
-  getCharacters(page: number = 1): Observable<ApiResponse<Character>> {
+  getCharacters(page = 1): Observable<ApiResponse<Character>> {
     const params = new HttpParams().set('page', page.toString());
     return this.http.get<ApiResponse<Character>>(`${this.apiUrl}${API_ROUTES.characters.base}`, {
       params,

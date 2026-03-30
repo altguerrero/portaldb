@@ -1,0 +1,32 @@
+<nav class="navbar">
+  <div class="navbar__inner">
+    <a [routerLink]="routes.characters" class="navbar__brand">
+      {{ config.appName }}
+    </a>
+
+    <ul class="navbar__links">
+      @for (link of navLinks; track link.path) {
+        <li>
+          <a
+            [routerLink]="link.path"
+            routerLinkActive="navbar__link--active"
+            [routerLinkActiveOptions]="{ exact: link.exact }"
+            class="navbar__link"
+          >
+            {{ link.label }}
+
+            @if (link.path === routes.favorites && favoritesCount() > 0) {
+              <span class="navbar__badge">{{ favoritesCount() }}</span>
+            }
+          </a>
+        </li>
+      }
+    </ul>
+
+    <div class="navbar__status">
+      <span class="navbar__dimension">{{ config.dimension }}</span>
+      <span class="navbar__live-dot pulse-dot">●</span>
+      <span class="navbar__live-label">LIVE</span>
+    </div>
+  </div>
+</nav>

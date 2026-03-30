@@ -1,0 +1,40 @@
+@if (shouldRender()) {
+  <nav class="pagination" [attr.aria-label]="ariaLabel()">
+    <button
+      type="button"
+      class="pagination__control"
+      [disabled]="!hasPreviousPage()"
+      (click)="changePage(currentPage() - 1)"
+    >
+      Prev
+    </button>
+
+    <div class="pagination__pages">
+      @for (item of paginationItems(); track trackPaginationItem($index, item)) {
+        @if (item.type === 'page') {
+          <button
+            type="button"
+            class="pagination__page"
+            [class.pagination__page--active]="item.value === currentPage()"
+            [attr.aria-current]="item.value === currentPage() ? 'page' : null"
+            [disabled]="item.value === currentPage()"
+            (click)="changePage(item.value!)"
+          >
+            {{ item.value }}
+          </button>
+        } @else {
+          <span class="pagination__ellipsis" aria-hidden="true">...</span>
+        }
+      }
+    </div>
+
+    <button
+      type="button"
+      class="pagination__control"
+      [disabled]="!hasNextPage()"
+      (click)="changePage(currentPage() + 1)"
+    >
+      Next
+    </button>
+  </nav>
+}

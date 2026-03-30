@@ -1,0 +1,22 @@
+<section class="not-found-page">
+  <p class="not-found-page__eyebrow">Signal Lost</p>
+
+  <div class="not-found-page__hero">
+    <p class="not-found-page__code">404</p>
+
+    <div class="not-found-page__copy">
+      <h1 class="not-found-page__title">This record does not exist in the registry.</h1>
+
+      <p class="not-found-page__description">
+        The route you requested could not be resolved. Return to the directory or continue to the
+        saved profiles area.
+      </p>
+    </div>
+  </div>
+
+  <div class="not-found-page__actions">
+    <app-button label="Browse Characters" [routerLink]="routes.characters" variant="primary" />
+
+    <app-button label="Open Favorites" [routerLink]="routes.favorites" variant="secondary" />
+  </div>
+</section>
