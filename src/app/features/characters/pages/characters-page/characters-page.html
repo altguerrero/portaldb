@@ -14,23 +14,91 @@
         <span class="characters-page__intro-bar"></span>
 
         <p class="characters-page__intro-text">
-          Accessing biological data from {{ vm.response.info.count }} confirmed multiversal
-          entities.
+          {{ vm.introText }}
         </p>
       </div>
     </div>
 
-    <div class="characters-page__grid">
-      @for (character of vm.response.results; track character.id) {
-        <app-character-card [character]="character" />
+    @switch (vm.state) {
+      @case ('loading') {
+        <div
+          class="characters-page__grid characters-page__grid--loading"
+          aria-label="Loading characters"
+          aria-busy="true"
+        >
+          @for (card of skeletonCards; track card) {
+            <article class="characters-page__skeleton-card">
+              <div class="characters-page__skeleton-media"></div>
+              <div class="characters-page__skeleton-body">
+                <span class="characters-page__skeleton-line characters-page__skeleton-line--eyebrow"></span>
+                <span class="characters-page__skeleton-line characters-page__skeleton-line--title"></span>
+                <span class="characters-page__skeleton-line"></span>
+                <span class="characters-page__skeleton-line characters-page__skeleton-line--short"></span>
+              </div>
+            </article>
+          }
+        </div>
       }
-    </div>
 
-    <app-pagination
-      ariaLabel="Characters pagination"
-      [currentPage]="vm.page"
-      [totalPages]="vm.response.info.pages"
-      (pageChange)="goToPage($event, vm.response.info.pages)"
-    />
+      @case ('ready') {
+        <div class="characters-page__grid">
+          @for (character of vm.characters; track character.id) {
+            <app-character-card [character]="character" />
+          }
+        </div>
+
+        <app-pagination
+          ariaLabel="Characters pagination"
+          [currentPage]="vm.page"
+          [totalPages]="vm.totalPages"
+          (pageChange)="goToPage($event, vm.totalPages)"
+        />
+      }
+
+      @case ('empty') {
+        <section class="characters-page__state" aria-live="polite">
+          <p class="characters-page__state-eyebrow">Registry Clear</p>
+          <h2 class="characters-page__state-title">No characters matched this scan.</h2>
+          <p class="characters-page__state-copy">
+            Try again in a moment or go back to the first page to restart the registry feed.
+          </p>
+          <div class="characters-page__state-actions">
+            <app-button
+              label="Retry Scan"
+              variant="primary"
+              (pressed)="retryPage()"
+            />
+            <app-button
+              label="Go To First Page"
+              [routerLink]="['/characters']"
+              variant="secondary"
+            />
+          </div>
+        </section>
+      }
+
+      @default {
+        <section class="characters-page__state" aria-live="polite">
+          <p class="characters-page__state-eyebrow">Signal Interrupted</p>
+          <h2 class="characters-page__state-title">The registry feed could not be loaded.</h2>
+          <p class="characters-page__state-copy">
+            The connection to the upstream archive failed. Retry the request to restore the
+            character list.
+          </p>
+          <div class="characters-page__state-actions">
+            <app-button
+              label="Retry Scan"
+              variant="primary"
+              (pressed)="retryPage()"
+            />
+            <app-button
+              label="Go To First Page"
+              [routerLink]="['/characters']"
+              variant="secondary"
+            />
+          </div>
+        </section>
+      }
+    }
   </section>
 }

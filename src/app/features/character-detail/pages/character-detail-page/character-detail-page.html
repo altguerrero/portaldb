@@ -1,175 +1,195 @@
 @if (vm$ | async; as vm) {
-  @if (vm.character; as character) {
-    <section class="detail-page">
-      <a [routerLink]="routes.characters" class="detail-page__back-link">
-        <span class="detail-page__back-icon">←</span>
-        Back To Characters
-      </a>
+  @switch (vm.state) {
+    @case ('ready') {
+      @if (vm.character; as character) {
+        <section class="detail-page">
+          <a [routerLink]="routes.characters" class="detail-page__back-link">
+            <span class="detail-page__back-icon">←</span>
+            Back To Characters
+          </a>
 
-      <div class="detail-page__layout">
-        <article class="detail-page__media-card">
-          <div class="detail-page__media-header">
-            <span class="detail-page__registry">{{ vm.registryId }}</span>
+          <div class="detail-page__layout">
+            <article class="detail-page__media-card">
+              <div class="detail-page__media-header">
+                <span class="detail-page__registry">{{ vm.registryId }}</span>
 
-            <div class="detail-page__status-badge">
-              <app-status-badge
-                [status]="character.status"
-                size="md"
-              />
-            </div>
-          </div>
+                <div class="detail-page__status-badge">
+                  <app-status-badge
+                    [status]="character.status"
+                    size="md"
+                  />
+                </div>
+              </div>
 
-          <div class="detail-page__portrait-shell">
-            <div class="detail-page__portrait-frame">
-              <img
-                [src]="character.image"
-                [alt]="character.name"
-                class="detail-page__portrait"
-              />
-            </div>
-          </div>
+              <div class="detail-page__portrait-shell">
+                <div class="detail-page__portrait-frame">
+                  <img
+                    [src]="character.image"
+                    [alt]="character.name"
+                    class="detail-page__portrait"
+                  />
+                </div>
+              </div>
 
-          <div class="detail-page__media-footer">
-            <div class="detail-page__media-meta">
-              <p class="detail-page__media-label">Species</p>
-              <p class="detail-page__media-value">{{ character.species }}</p>
-            </div>
+              <div class="detail-page__media-footer">
+                <div class="detail-page__media-meta">
+                  <p class="detail-page__media-label">Species</p>
+                  <p class="detail-page__media-value">{{ character.species }}</p>
+                </div>
 
-            <div class="detail-page__media-meta">
-              <p class="detail-page__media-label">Profile Class</p>
-              <p class="detail-page__media-value">{{ vm.typeLabel }}</p>
-            </div>
-          </div>
-        </article>
-
-        <article class="detail-page__profile-card">
-          <header class="detail-page__profile-header">
-            <p class="detail-page__eyebrow">Subject Profile</p>
-
-            <h1 class="detail-page__title">{{ character.name }}</h1>
-
-            <p class="detail-page__summary">
-              Registered as {{ vm.profileTag }} and currently tracked in
-              {{ character.location.name }}.
-            </p>
-          </header>
-
-          <div class="detail-page__divider"></div>
-
-          <dl class="detail-page__facts">
-            <div class="detail-page__fact">
-              <dt>Official Name</dt>
-              <dd>{{ character.name }}</dd>
-            </div>
-
-            <div class="detail-page__fact">
-              <dt>Vitals Status</dt>
-              <dd
-                class="detail-page__fact-status"
-                [class.detail-page__fact-status--alive]="character.status === 'Alive'"
-                [class.detail-page__fact-status--dead]="character.status === 'Dead'"
-                [class.detail-page__fact-status--unknown]="character.status === 'unknown'"
-              >
-                {{ vm.statusLabel }}
-              </dd>
-            </div>
-
-            <div class="detail-page__fact">
-              <dt>Species</dt>
-              <dd>{{ character.species }}</dd>
-            </div>
-
-            <div class="detail-page__fact">
-              <dt>Gender</dt>
-              <dd>{{ character.gender === 'unknown' ? 'Unknown' : character.gender }}</dd>
-            </div>
-
-            <div class="detail-page__fact">
-              <dt>Origin</dt>
-              <dd>{{ character.origin.name }}</dd>
-            </div>
-
-            <div class="detail-page__fact">
-              <dt>Last Location</dt>
-              <dd>{{ character.location.name }}</dd>
-            </div>
-          </dl>
-
-          <div class="detail-page__stats">
-            <article class="detail-page__stat detail-page__stat--primary">
-              <p class="detail-page__stat-label">Episode Appearances</p>
-              <p class="detail-page__stat-value">{{ character.episode.length }}</p>
-              <p class="detail-page__stat-copy">Recorded episodes currently linked to this file.</p>
+                <div class="detail-page__media-meta">
+                  <p class="detail-page__media-label">Profile Class</p>
+                  <p class="detail-page__media-value">{{ vm.typeLabel }}</p>
+                </div>
+              </div>
             </article>
 
-            <article class="detail-page__stat">
-              <p class="detail-page__stat-label">First Registry Ping</p>
-              <p class="detail-page__stat-value detail-page__stat-value--compact">
-                {{ character.created | date: 'MMM d, y' }}
-              </p>
-              <p class="detail-page__stat-copy">Initial ingestion date in the archive network.</p>
-            </article>
+            <article class="detail-page__profile-card">
+              <header class="detail-page__profile-header">
+                <p class="detail-page__eyebrow">Subject Profile</p>
 
-            <article class="detail-page__stat">
-              <p class="detail-page__stat-label">Dimension Anchor</p>
-              <p class="detail-page__stat-value detail-page__stat-value--compact">
-                {{ character.origin.name }}
-              </p>
-              <p class="detail-page__stat-copy">Source world of record for this subject.</p>
+                <h1 class="detail-page__title">{{ character.name }}</h1>
+
+                <p class="detail-page__summary">
+                  Registered as {{ vm.profileTag }} and currently tracked in
+                  {{ character.location.name }}.
+                </p>
+              </header>
+
+              <div class="detail-page__divider"></div>
+
+              <dl class="detail-page__facts">
+                <div class="detail-page__fact">
+                  <dt>Official Name</dt>
+                  <dd>{{ character.name }}</dd>
+                </div>
+
+                <div class="detail-page__fact">
+                  <dt>Vitals Status</dt>
+                  <dd
+                    class="detail-page__fact-status"
+                    [class.detail-page__fact-status--alive]="character.status === 'Alive'"
+                    [class.detail-page__fact-status--dead]="character.status === 'Dead'"
+                    [class.detail-page__fact-status--unknown]="character.status === 'unknown'"
+                  >
+                    {{ vm.statusLabel }}
+                  </dd>
+                </div>
+
+                <div class="detail-page__fact">
+                  <dt>Species</dt>
+                  <dd>{{ character.species }}</dd>
+                </div>
+
+                <div class="detail-page__fact">
+                  <dt>Gender</dt>
+                  <dd>{{ character.gender === 'unknown' ? 'Unknown' : character.gender }}</dd>
+                </div>
+
+                <div class="detail-page__fact">
+                  <dt>Origin</dt>
+                  <dd>{{ character.origin.name }}</dd>
+                </div>
+
+                <div class="detail-page__fact">
+                  <dt>Last Location</dt>
+                  <dd>{{ character.location.name }}</dd>
+                </div>
+              </dl>
+
+              <div class="detail-page__stats">
+                <article class="detail-page__stat detail-page__stat--primary">
+                  <p class="detail-page__stat-label">Episode Appearances</p>
+                  <p class="detail-page__stat-value">{{ character.episode.length }}</p>
+                  <p class="detail-page__stat-copy">
+                    Recorded episodes currently linked to this file.
+                  </p>
+                </article>
+
+                <article class="detail-page__stat">
+                  <p class="detail-page__stat-label">First Registry Ping</p>
+                  <p class="detail-page__stat-value detail-page__stat-value--compact">
+                    {{ character.created | date: 'MMM d, y' }}
+                  </p>
+                  <p class="detail-page__stat-copy">
+                    Initial ingestion date in the archive network.
+                  </p>
+                </article>
+
+                <article class="detail-page__stat">
+                  <p class="detail-page__stat-label">Dimension Anchor</p>
+                  <p class="detail-page__stat-value detail-page__stat-value--compact">
+                    {{ character.origin.name }}
+                  </p>
+                  <p class="detail-page__stat-copy">
+                    Source world of record for this subject.
+                  </p>
+                </article>
+              </div>
+
+              <div class="detail-page__actions">
+                <app-button
+                  [label]="vm.isFavorite ? 'Remove From Favorites' : 'Add To Favorites'"
+                  variant="primary"
+                  [active]="vm.isFavorite"
+                  (pressed)="toggleFavorite(character, vm.isFavorite)"
+                />
+
+                <app-button
+                  label="Open Favorites"
+                  [routerLink]="routes.favorites"
+                  variant="secondary"
+                />
+              </div>
             </article>
           </div>
+        </section>
+      }
+    }
 
-          <div class="detail-page__actions">
-            <app-button
-              [label]="vm.isFavorite ? 'Remove From Favorites' : 'Add To Favorites'"
-              variant="primary"
-              [active]="vm.isFavorite"
-              (pressed)="toggleFavorite(character, vm.isFavorite)"
-            />
+    @case ('loading') {
+      <section class="detail-page detail-page--state" aria-live="polite" aria-busy="true">
+        <p class="detail-page__eyebrow">Loading Record</p>
 
-            <app-button
-              label="Open Favorites"
-              [routerLink]="routes.favorites"
-              variant="secondary"
-            />
-          </div>
-        </article>
-      </div>
-    </section>
-  } @else {
-    <section class="detail-page detail-page--state">
-      <p class="detail-page__eyebrow">Signal Lost</p>
+        <h1 class="detail-page__title">Scanning Multiversal Registry</h1>
 
-      <h1 class="detail-page__title">This record could not be resolved.</h1>
+        <p class="detail-page__description">
+          Synchronizing subject metadata, travel logs and favorites state.
+        </p>
+      </section>
+    }
 
-      <p class="detail-page__description">
-        The requested character is outside the current registry scan. Return to the main list or
-        continue to your saved profiles.
-      </p>
+    @default {
+      <section class="detail-page detail-page--state" aria-live="polite">
+        <p class="detail-page__eyebrow">Signal Lost</p>
 
-      <div class="detail-page__actions">
-        <app-button
-          label="Browse Characters"
-          [routerLink]="routes.characters"
-          variant="primary"
-        />
+        <h1 class="detail-page__title">This record could not be resolved.</h1>
 
-        <app-button
-          label="Open Favorites"
-          [routerLink]="routes.favorites"
-          variant="secondary"
-        />
-      </div>
-    </section>
+        <p class="detail-page__description">
+          The requested character is outside the current registry scan or the detail feed failed.
+          Retry the request, return to the main list or continue to your saved profiles.
+        </p>
+
+        <div class="detail-page__actions">
+          <app-button
+            label="Retry Scan"
+            variant="primary"
+            (pressed)="retry()"
+          />
+
+          <app-button
+            label="Browse Characters"
+            [routerLink]="routes.characters"
+            variant="secondary"
+          />
+
+          <app-button
+            label="Open Favorites"
+            [routerLink]="routes.favorites"
+            variant="ghost"
+          />
+        </div>
+      </section>
+    }
   }
-} @else {
-  <section class="detail-page detail-page--state">
-    <p class="detail-page__eyebrow">Loading Record</p>
-
-    <h1 class="detail-page__title">Scanning Multiversal Registry</h1>
-
-    <p class="detail-page__description">
-      Synchronizing subject metadata, travel logs and favorites state.
-    </p>
-  </section>
 }
