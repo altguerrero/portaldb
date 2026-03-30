@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, ElementRef, inject, signal, viewChild } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { catchError, distinctUntilChanged, map, startWith, switchMap, tap } from 'rxjs/operators';
@@ -31,7 +31,6 @@ export class CharactersPage {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly charactersService = inject(CharactersService);
-  private readonly pageTop = viewChild.required<ElementRef<HTMLElement>>('pageTop');
   private readonly retry$ = new Subject<void>();
 
   readonly skeletonCards = Array.from({ length: 8 }, (_, index) => index);
@@ -86,9 +85,7 @@ export class CharactersPage {
         queryParamsHandling: 'merge',
       })
       .then((didNavigate) => {
-        if (didNavigate) {
-          this.scrollToResultsTop();
-        } else {
+        if (!didNavigate) {
           this.isPageScanning.set(false);
         }
       });
@@ -96,13 +93,6 @@ export class CharactersPage {
 
   retryPage(): void {
     this.retry$.next();
-  }
-
-  private scrollToResultsTop(): void {
-    this.pageTop().nativeElement.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-    });
   }
 
   private currentPageSnapshot(): number {
