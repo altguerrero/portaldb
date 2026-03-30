@@ -49,6 +49,13 @@
   transform: translateY(-2px);
 }
 
+.pagination__control:focus-visible,
+.pagination__page:focus-visible {
+  outline: none;
+  border: var(--border-accent-solid);
+  box-shadow: var(--shadow-focus-ring);
+}
+
 .pagination__control:disabled,
 .pagination__page:disabled {
   transform: none;
@@ -97,5 +104,27 @@
   .pagination__control,
   .pagination__page {
     height: 3.15rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pagination {
+    gap: 0.65rem;
+  }
+
+  .pagination__pages {
+    gap: 0.45rem;
+  }
+
+  .pagination__control,
+  .pagination__page {
+    min-width: 2.85rem;
+    height: 2.65rem;
+    padding: 0 0.75rem;
+    font-size: 0.88rem;
+  }
+
+  .pagination__control {
+    min-width: 3.4rem;
   }
 }

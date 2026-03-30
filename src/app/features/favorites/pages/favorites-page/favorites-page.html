@@ -1,7 +1,7 @@
 @if (vm$ | async; as vm) {
-  <section class="favorites-page">
+  <section class="favorites-page u-reveal-page">
     <div class="favorites-page__hero">
-      <div class="favorites-page__heading">
+      <div class="favorites-page__heading u-reveal-heading">
         <p class="favorites-page__eyebrow">Saved Dimensions</p>
 
         <h1 class="favorites-page__title">
@@ -12,7 +12,7 @@
         <div class="favorites-page__rule"></div>
       </div>
 
-      <div class="favorites-page__intro">
+      <div class="favorites-page__intro u-reveal-intro">
         <span class="favorites-page__intro-bar"></span>
 
         <p class="favorites-page__description">
@@ -22,17 +22,26 @@
     </div>
 
     <div class="favorites-page__stats">
-      <article class="favorites-page__stat favorites-page__stat--primary">
+      <article
+        class="favorites-page__stat u-stagger-reveal favorites-page__stat--primary"
+        style="--stagger-base: 140ms; --stagger-step: 80ms; --stagger-order: 0"
+      >
         <p class="favorites-page__stat-label">Saved Profiles</p>
         <p class="favorites-page__stat-value">{{ vm.totalFavorites }}</p>
       </article>
 
-      <article class="favorites-page__stat">
+      <article
+        class="favorites-page__stat u-stagger-reveal"
+        style="--stagger-base: 140ms; --stagger-step: 80ms; --stagger-order: 1"
+      >
         <p class="favorites-page__stat-label">Live Signatures</p>
         <p class="favorites-page__stat-value">{{ vm.aliveCount }}</p>
       </article>
 
-      <article class="favorites-page__stat">
+      <article
+        class="favorites-page__stat u-stagger-reveal"
+        style="--stagger-base: 140ms; --stagger-step: 80ms; --stagger-order: 2"
+      >
         <p class="favorites-page__stat-label">Origin Worlds</p>
         <p class="favorites-page__stat-value">{{ vm.uniqueOrigins }}</p>
       </article>
@@ -40,8 +49,12 @@
 
     @if (vm.favorites.length > 0) {
       <div class="favorites-page__list">
-        @for (item of vm.favorites; track item.character.id) {
-          <article class="favorites-page__item">
+        @for (item of vm.favorites; track item.character.id; let index = $index) {
+          <article
+            class="favorites-page__item u-stagger-reveal"
+            style="--stagger-base: 180ms; --stagger-step: 80ms"
+            [style.--stagger-order]="index"
+          >
             <a
               [routerLink]="routes.characterDetail(item.character.id)"
               class="favorites-page__item-main"
@@ -74,12 +87,14 @@
 
               <div class="favorites-page__item-actions">
                 <app-button
+                  class="favorites-page__action favorites-page__action--primary"
                   label="Open Profile"
                   [routerLink]="routes.characterDetail(item.character.id)"
                   variant="ghost"
                 />
 
                 <app-button
+                  class="favorites-page__action favorites-page__action--danger"
                   label="Remove"
                   variant="danger"
                   (pressed)="removeFavorite(item.character.id)"
