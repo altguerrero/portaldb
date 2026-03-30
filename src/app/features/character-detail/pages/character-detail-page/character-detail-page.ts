@@ -7,7 +7,9 @@ import { catchError, distinctUntilChanged, map, switchMap } from 'rxjs/operators
 
 import { APP_ROUTES } from '../../../../core/constants/app-routes.constants';
 import { CharactersService } from '../../../../core/services/characters.service';
+import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { Character } from '../../../../shared/models/character.model';
+import { StatusBadgeComponent } from '../../../../shared/components/status-badge/status-badge.component';
 import { addFavorite, removeFavorite } from '../../../../store/favorites/favorites.actions';
 import { selectIsFavorite } from '../../../../store/favorites/favorites.selectors';
 
@@ -22,7 +24,7 @@ interface CharacterDetailViewModel {
 
 @Component({
   selector: 'app-character-detail-page',
-  imports: [AsyncPipe, DatePipe, RouterLink],
+  imports: [AsyncPipe, DatePipe, RouterLink, ButtonComponent, StatusBadgeComponent],
   templateUrl: './character-detail-page.html',
   styleUrl: './character-detail-page.css',
 })

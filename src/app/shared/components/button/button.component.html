@@ -1,0 +1,28 @@
+@if (routerLink(); as link) {
+  <a
+    [routerLink]="link"
+    class="ui-button"
+    [class.ui-button--primary]="variant() === 'primary'"
+    [class.ui-button--secondary]="variant() === 'secondary'"
+    [class.ui-button--ghost]="variant() === 'ghost'"
+    [class.ui-button--danger]="variant() === 'danger'"
+    [class.ui-button--active]="active()"
+    [attr.aria-disabled]="disabled()"
+  >
+    <span class="ui-button__label">{{ label() }}</span>
+  </a>
+} @else {
+  <button
+    [type]="type()"
+    class="ui-button"
+    [class.ui-button--primary]="variant() === 'primary'"
+    [class.ui-button--secondary]="variant() === 'secondary'"
+    [class.ui-button--ghost]="variant() === 'ghost'"
+    [class.ui-button--danger]="variant() === 'danger'"
+    [class.ui-button--active]="active()"
+    [disabled]="disabled()"
+    (click)="handleClick()"
+  >
+    <span class="ui-button__label">{{ label() }}</span>
+  </button>
+}

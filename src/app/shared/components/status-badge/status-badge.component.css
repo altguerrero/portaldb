@@ -1,0 +1,56 @@
+:host {
+  display: inline-flex;
+  width: fit-content;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  width: fit-content;
+  border: var(--border-glass);
+  border-radius: var(--radius-full);
+  background: var(--surface-glass);
+  backdrop-filter: blur(10px);
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.status-badge--md {
+  padding: 0.6rem 0.95rem;
+  font-size: 0.72rem;
+}
+
+.status-badge--sm {
+  padding: 0.45rem 0.75rem;
+  font-size: 0.68rem;
+}
+
+.status-badge__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: var(--radius-full);
+  background: currentColor;
+  box-shadow: var(--shadow-status-dot);
+}
+
+.status-badge--alive {
+  color: var(--color-accent-ink);
+  background: var(--surface-status-alive);
+  box-shadow: var(--shadow-pill-accent);
+}
+
+.status-badge--dead {
+  color: var(--color-danger-ink);
+  background: var(--surface-status-dead);
+  box-shadow: var(--shadow-pill-danger);
+}
+
+.status-badge--unknown {
+  color: var(--color-status-unknown-text);
+  background: var(--surface-status-unknown);
+  box-shadow: var(--shadow-pill-neutral);
+}

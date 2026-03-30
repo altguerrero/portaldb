@@ -9,15 +9,12 @@
       class="character-card__image"
     />
 
-    <span
-      class="character-card__status"
-      [class.character-card__status--alive]="character().status === 'Alive'"
-      [class.character-card__status--dead]="character().status === 'Dead'"
-      [class.character-card__status--unknown]="character().status === 'unknown'"
-    >
-      <span class="character-card__status-dot"></span>
-      {{ statusLabel() }}
-    </span>
+    <div class="character-card__status">
+      <app-status-badge
+        [status]="character().status"
+        size="sm"
+      />
+    </div>
 
     <div class="character-card__registry">
       <span class="character-card__registry-id">{{ registryId() }}</span>

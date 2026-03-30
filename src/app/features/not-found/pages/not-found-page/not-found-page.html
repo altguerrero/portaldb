@@ -15,12 +15,16 @@
   </div>
 
   <div class="not-found-page__actions">
-    <a [routerLink]="routes.characters" class="not-found-page__button not-found-page__button--primary">
-      Browse Characters
-    </a>
+    <app-button
+      label="Browse Characters"
+      [routerLink]="routes.characters"
+      variant="primary"
+    />
 
-    <a [routerLink]="routes.favorites" class="not-found-page__button not-found-page__button--secondary">
-      Open Favorites
-    </a>
+    <app-button
+      label="Open Favorites"
+      [routerLink]="routes.favorites"
+      variant="secondary"
+    />
   </div>
 </section>

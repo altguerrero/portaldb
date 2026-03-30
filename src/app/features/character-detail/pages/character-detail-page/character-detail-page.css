@@ -65,8 +65,7 @@
   gap: 1rem;
 }
 
-.detail-page__registry,
-.detail-page__status-badge {
+.detail-page__registry {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
@@ -85,30 +84,8 @@
   color: var(--text-primary-soft);
 }
 
-.detail-page__status-badge--alive {
-  color: var(--color-accent-ink);
-  background: var(--surface-status-alive);
-  box-shadow: var(--shadow-pill-accent);
-}
-
-.detail-page__status-badge--dead {
-  color: var(--color-danger-ink);
-  background: var(--surface-status-dead);
-  box-shadow: var(--shadow-pill-danger);
-}
-
-.detail-page__status-badge--unknown {
-  color: var(--color-status-unknown-text);
-  background: var(--surface-status-unknown);
-  box-shadow: var(--shadow-pill-neutral);
-}
-
-.detail-page__status-dot {
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: var(--radius-full);
-  background: currentColor;
-  box-shadow: var(--shadow-status-dot);
+.detail-page__status-badge {
+  align-self: flex-start;
 }
 
 .detail-page__portrait-shell {
@@ -297,51 +274,6 @@
   padding-top: 0.25rem;
 }
 
-.detail-page__button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 3.5rem;
-  padding: 0.85rem 1.35rem;
-  border-radius: var(--radius-md);
-  border: var(--border-neutral);
-  background: transparent;
-  color: var(--text-secondary-base);
-  cursor: pointer;
-  font-family: var(--font-display);
-  font-size: 0.84rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  transition:
-    border-color var(--transition-fast),
-    color var(--transition-fast),
-    background-color var(--transition-fast),
-    box-shadow var(--transition-fast),
-    transform var(--transition-fast);
-}
-
-.detail-page__button:hover {
-  transform: translateY(-2px);
-}
-
-.detail-page__button--primary {
-  border: var(--border-accent);
-  color: var(--color-accent);
-}
-
-.detail-page__button--primary:hover,
-.detail-page__button--active {
-  border: var(--border-accent-solid);
-  background: var(--surface-accent-hover);
-  box-shadow: var(--shadow-pill-accent);
-}
-
-.detail-page__button--secondary:hover {
-  border: var(--border-accent-hover);
-  color: var(--color-accent);
-}
-
 @media (min-width: 768px) {
   .detail-page {
     gap: 2rem;
@@ -398,7 +330,7 @@
     display: grid;
   }
 
-  .detail-page__button {
+  .detail-page__actions app-button {
     width: 100%;
   }
 
